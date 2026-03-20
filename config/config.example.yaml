@@ -1,0 +1,127 @@
+# LegislAItive Report Configuration
+# Copy to config.yaml and fill in your values
+
+anthropic:
+  api_key: "your-api-key-here"
+  model: "claude-sonnet-4-5-20250929"  # Sonnet for cost efficiency on daily runs
+  model_editorial: "claude-opus-4-6"   # Opus for the final briefing polish (optional)
+
+# RSS feeds and news sources to monitor
+feeds:
+  # National / cross-state sources
+  - name: "Government Technology"
+    url: "https://www.govtech.com/rss"
+    category: "govtech"
+    
+  - name: "Route Fifty"
+    url: "https://www.route-fifty.com/rss/all"
+    category: "state_local"
+    
+  - name: "StateScoop"
+    url: "https://statescoop.com/feed/"
+    category: "govtech"
+
+  - name: "NCSL News"
+    url: "https://www.ncsl.org/rss/news.xml"
+    category: "legislation"
+
+  - name: "Governing"
+    url: "https://www.governing.com/rss"
+    category: "state_local"
+
+  - name: "Ars Technica - AI"
+    url: "https://feeds.arstechnica.com/arstechnica/technology-lab"
+    category: "tech_news"
+
+  - name: "The Markup"
+    url: "https://themarkup.org/feeds/rss.xml"
+    category: "tech_accountability"
+
+  - name: "Brookings TechTank"
+    url: "https://www.brookings.edu/blog/techtank/feed/"
+    category: "policy_analysis"
+
+  # Oklahoma-specific (customize per target state)
+  - name: "Oklahoma Legislature - Filed Bills"
+    url: "http://www.oklegislature.gov/BillInfo.aspx"  # NOTE: may need scraper, not RSS
+    category: "state_bills"
+    state: "OK"
+
+# Keywords that signal relevance (scored by tier)
+keywords:
+  tier1:  # Directly on topic - high relevance
+    - "artificial intelligence"
+    - "AI regulation"
+    - "AI policy"
+    - "algorithmic"
+    - "automated decision"
+    - "machine learning"
+    - "facial recognition"
+    - "predictive policing"
+    - "government AI"
+    - "AI procurement"
+    - "AI governance"
+    - "deepfake"
+    - "generative AI"
+    - "large language model"
+    - "AI executive order"
+    - "AI task force"
+    - "AI legislation"
+
+  tier2:  # Adjacent / enabling topics
+    - "data privacy"
+    - "digital government"
+    - "government technology"
+    - "cybersecurity"
+    - "workforce automation"
+    - "digital equity"
+    - "broadband"
+    - "open data"
+    - "smart city"
+    - "surveillance"
+
+  tier3:  # Broader context
+    - "technology procurement"
+    - "digital transformation"
+    - "innovation office"
+    - "chief technology officer"
+    - "IT modernization"
+
+# Relevance scoring
+scoring:
+  tier1_weight: 10
+  tier2_weight: 5
+  tier3_weight: 2
+  title_multiplier: 3      # Keywords in title worth 3x
+  recency_bonus: 5          # Items from last 24h get bonus
+  min_score_for_briefing: 8  # Minimum score to include in briefing
+
+# Briefing settings
+briefing:
+  frequency: "weekly"        # weekly or biweekly
+  max_items: 20              # Max items to analyze per briefing
+  output_format: "markdown"  # markdown or html
+  target_length: "1500-2500" # words
+  
+# Delivery (Phase 2)
+# email:
+#   platform: "buttondown"   # or beehiiv
+#   api_key: "your-key"
+#   from_name: "LegislAItive Report"
+#   from_email: "briefing@legislaitive.report"
+
+# LegiScan API (state bill tracking)
+# Register for free key at: https://legiscan.com/legiscan
+# Free tier: 30,000 queries/month (more than enough)
+legiscan:
+  api_key: "your-legiscan-key-here"
+  states:
+    - "OK"       # Oklahoma - primary market
+    # Add more states as you expand:
+    # - "TX"
+    # - "CO"
+    # - "KS"
+
+# Database
+database:
+  path: "data/intelligence.db"

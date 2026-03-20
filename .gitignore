@@ -1,0 +1,10 @@
+config/config.yaml
+data/*.db
+data/*.log
+output/drafts/
+output/published/
+__pycache__/
+*.pyc
+.env
+venv/
+src/api_test.py
