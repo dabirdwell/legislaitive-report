@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Inference — Issue 4 | Humanity and AI</title>
+<meta name="description" content="AI policy intelligence brief. Issue 4: The Preemption Gambit, The Agent Problem, Oklahoma's AI Legislative Surge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #161616;
+    --bg-surface: #1c1c1c;
+    --bg-elevated: #222222;
+    --text: #e0dcd8;
+    --text-muted: #a09890;
+    --text-dim: #6b6560;
+    --primary-brown: #d4a574;
+    --accent-amber: #d4876a;
+    --accent-warm: #BF6745;
+    --border: #3a3530;
+    --border-light: #2a2520;
+    --red-alert: #c45c4a;
+    --green-ok: #6a9a6a;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Masthead ── */
+  .masthead {
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+  }
+  .masthead-logo {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 3rem;
+    color: var(--primary-brown);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+  .masthead-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-top: 0.3rem;
+  }
+  .masthead-issue {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── Section headings ── */
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0 0;
+  }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent-amber);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin: 2rem 0 1rem;
+  }
+
+  /* ── Lead story ── */
+  .lead {
+    margin: 2.5rem 0 2rem;
+  }
+  .lead h2 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .lead-deck {
+    font-size: 1.15rem;
+    color: var(--accent-amber);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .lead p {
+    margin-bottom: 1rem;
+  }
+
+  /* ── Stat callout ── */
+  .stat-callout {
+    background: var(--bg-surface);
+    border-left: 3px solid var(--accent-warm);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .stat-callout .stat-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent-amber);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .stat-callout .stat-label {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ── Article blocks ── */
+  article {
+    margin: 2.5rem 0;
+  }
+  article h3 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+  }
+  article p {
+    margin-bottom: 1rem;
+  }
+
+  /* ── Source tags ── */
+  .source {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  /* ── Data point / chart ── */
+  .data-section {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .data-section h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-amber);
+    margin-bottom: 1.5rem;
+  }
+  .bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .bar-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    width: 140px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: var(--bg-elevated);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s ease;
+  }
+  .bar-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text);
+    width: 40px;
+    flex-shrink: 0;
+  }
+  .bar-fill.high    { background: var(--red-alert); }
+  .bar-fill.medium  { background: var(--accent-warm); }
+  .bar-fill.low     { background: var(--primary-brown); }
+  .bar-fill.minimal { background: var(--text-dim); }
+
+  /* ── Oklahoma focus ── */
+  .ok-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+  .ok-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+  .ok-card h4 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .ok-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+  .ok-status {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 0.3rem;
+  }
+  .ok-status.advancing {
+    background: rgba(106, 154, 106, 0.15);
+    color: var(--green-ok);
+    border: 1px solid rgba(106, 154, 106, 0.3);
+  }
+  .ok-status.paused {
+    background: rgba(196, 92, 74, 0.12);
+    color: var(--red-alert);
+    border: 1px solid rgba(196, 92, 74, 0.25);
+  }
+  .ok-status.active {
+    background: rgba(212, 165, 116, 0.15);
+    color: var(--primary-brown);
+    border: 1px solid rgba(212, 165, 116, 0.3);
+  }
+  .ok-status.new {
+    background: rgba(212, 135, 106, 0.15);
+    color: var(--accent-amber);
+    border: 1px solid rgba(212, 135, 106, 0.3);
+  }
+
+  /* ── Blockquote / pull quote ── */
+  blockquote {
+    border-left: 3px solid var(--accent-warm);
+    padding: 0.8rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+
+  /* ── Strong emphasis ── */
+  strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+    padding: 2rem;
+    text-align: center;
+  }
+  .footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+  }
+  .footer a {
+    color: var(--accent-amber);
+    text-decoration: none;
+  }
+
+  /* ── Links ── */
+  a { color: var(--accent-amber); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .masthead-logo { font-size: 2.2rem; }
+    .lead h2 { font-size: 1.6rem; }
+    .container { padding: 0 1.2rem; }
+    .bar-label { width: 100px; font-size: 0.6rem; }
+    .stat-callout .stat-number { font-size: 1.3rem; }
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: #fff; color: #111; font-size: 11pt; }
+    .masthead { border-color: #ccc; }
+    .masthead-logo { color: #491D0C; }
+    .section-label { color: #BF6745; }
+    .stat-callout { border-color: #BF6745; background: #f9f6f3; }
+    .data-section { background: #f9f6f3; border-color: #ddd; }
+    .ok-card { background: #f9f6f3; border-color: #ddd; }
+    .bar-fill.high { background: #c45c4a; }
+    .bar-fill.medium { background: #BF6745; }
+    .bar-fill.low { background: #a0794c; }
+    .bar-fill.minimal { background: #bbb; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-logo">The Inference</div>
+  <div class="masthead-sub">AI Policy Intelligence Brief</div>
+  <div class="masthead-issue">Issue 4 &middot; March 21, 2026 &middot; The Preemption Gambit</div>
+</header>
+
+<main class="container">
+
+  <!-- ══════════════════════════════════════════ LEAD ══════ -->
+  <div class="lead">
+    <p class="section-label">The Lead</p>
+    <h2>1,561 Bills vs. One Act:<br>The Federal Fight to Kill State AI Law</h2>
+    <p class="lead-deck">The White House unveiled a national AI framework the same week Kansas passed three AI bills unanimously, Virginia sent four to the governor, and Washington cleared five. The states aren&rsquo;t waiting &mdash; and the feds want them to stop.</p>
+
+    <p>On March 20, the Trump administration released its national AI legislative framework, asking Congress to establish federal standards that would override state AI regulation. The push codifies a December 2025 executive order that created an AI Litigation Task Force empowered to sue states whose AI laws the administration considers &ldquo;unduly burdensome.&rdquo; The legislative vehicle is the TRUMP AMERICA AI Act, introduced by Senator Marsha Blackburn, which would preempt state laws on frontier AI risk management, digital replicas, and catastrophic risk protocols.</p>
+
+    <p>The timing is revealing. As of this week, lawmakers in 45 states have introduced 1,561 AI-related bills in the 2026 session alone. In just the past seven days: Kansas passed three AI protection bills with unanimous votes in both chambers. Virginia sent four AI bills to the governor, including an AI fraud framework and a ban on mandatory student chatbot interactions. Washington cleared five bills covering AI disclosure, chatbot safety, health insurance AI, deepfake protections, and digital likeness rights. Maryland&rsquo;s Senate passed a deepfake protection bill 45&ndash;0.</p>
+
+    <div class="stat-callout">
+      <span class="stat-number">2 for 2</span>
+      <span class="stat-label">Congress has already rejected AI preemption twice &mdash; stripped from the One Big Beautiful Bill Act by a 99&ndash;1 Senate vote, and removed from the FY26 defense authorization bill. Governors from both parties, including DeSantis and Newsom, have opposed federal preemption of state AI laws.</span>
+    </div>
+
+    <p>The AMERICA AI Act isn&rsquo;t a light touch. It creates a federal duty of care requiring developers to &ldquo;prevent and mitigate foreseeable harm,&rdquo; mandates bias audits for high-risk systems, reforms Section 230 with a &ldquo;Bad Samaritan&rdquo; provision, establishes private rights of action for unauthorized training data use, and requires frontier AI developers to report catastrophic risks to DHS. Companies currently complying with Colorado, California, or New York AI laws would be swapping one compliance regime for another that may be equally demanding.</p>
+
+    <p>The political math doesn&rsquo;t favor preemption. Both parties have governors who want to keep state authority. Industry is split &mdash; some companies want regulatory uniformity, others fear the federal framework is more burdensome than the state patchwork it replaces. And the states are moving fast enough that by the time Congress acts, dozens of AI laws will already be on the books. The question isn&rsquo;t whether states will regulate AI. It&rsquo;s whether the federal government can stop them. So far, the answer is no.</p>
+    <span class="source">Sources: White House &middot; National Law Review &middot; CNBC &middot; Transparency Coalition &middot; March 20, 2026</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════ FEATURE ══════ -->
+  <hr class="section-rule">
+  <p class="section-label">Feature</p>
+  <article>
+    <h3>The Agent Problem: When AI Stops Answering and Starts Acting</h3>
+    <span class="source">Sources: World Economic Forum &middot; Gartner &middot; Microsoft Security &middot; Accelirate &middot; March 2026</span>
+
+    <p>Something changed in AI this year that most governance frameworks haven&rsquo;t caught up to. The systems stopped being tools you query and started being agents that act. Eighty percent of Fortune 500 companies now deploy active AI agents &mdash; systems that don&rsquo;t just generate text but execute tasks across connected systems, make decisions in sequence, and take actions with real-world consequences. The shift from chatbot to agent is the shift from content to behavior, and every AI safety framework built for the chatbot era is now measuring the wrong thing.</p>
+
+    <p>The governance gap is staggering. Gartner predicts 40% of agentic AI projects will be cancelled by 2027 &mdash; not because the technology doesn&rsquo;t work, but because organizations deployed agents faster than they could control, explain, or audit them. The Cloud Security Alliance found that while 40% of enterprise applications will embed AI agents by end of 2026, only 6% of organizations have advanced AI security strategies to govern them.</p>
+
+    <blockquote>The most critical evolution is the shift from governing content &mdash; what the AI says &mdash; to governing behavior &mdash; what the AI does. Our evaluation frameworks were designed for a world where AI answered questions. That world is over.</blockquote>
+
+    <p>The risks are structural, not hypothetical. &ldquo;Semantic privilege escalation&rdquo; allows agents to chain actions across connected systems, accumulating aggregate privileges no single human user would possess. Prompt injection &mdash; malicious instructions embedded in emails, documents, or web pages &mdash; can hijack an agent&rsquo;s behavior mid-task. And because agents integrate with multiple systems, errors propagate at machine speed through infrastructure that was designed for human-paced decision-making.</p>
+
+    <p>This connects directly to the Structured Emergence framework. In Issue 3, we described AI&rsquo;s &ldquo;pre-Maxwell phase&rdquo; &mdash; the observation that real AI capability lives not in isolated skills but in the transitions between them. Agents are exactly where those transitions become operational. An agent that can read your email, search your files, draft a response, and send it has crossed from discrete skill to emergent behavior. The capability isn&rsquo;t in any single action &mdash; it&rsquo;s in the chain. And right now, nobody is governing the chain.</p>
+
+    <p>For legislators: every AI bill currently moving through state houses regulates AI as a content producer &mdash; disclosure requirements, bias audits, transparency mandates. These are necessary. But the agent era demands a new category: <strong>behavioral governance</strong>. Rules about what AI systems are permitted to <em>do</em>, not just what they&rsquo;re permitted to say. The states that figure this out first will set the standard. The EU&rsquo;s AI Act becomes fully enforceable on August 2, 2026, and it doesn&rsquo;t adequately address autonomous agents either. The gap is global, and it&rsquo;s growing.</p>
+  </article>
+
+  <!-- ══════════════════════════════════════════ DATA POINT ══════ -->
+  <hr class="section-rule">
+  <div class="data-section">
+    <h3>Data Point &mdash; State AI Bills Passed or Advancing, Week of March 14&ndash;21</h3>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.2rem; font-family: 'Cormorant Garamond', serif;">
+      Bills passed by at least one chamber or signed into law. 45 states have introduced 1,561 AI-related bills in the 2026 session. This week&rsquo;s leaders:
+    </p>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <span class="bar-label">Washington</span>
+        <div class="bar-track"><div class="bar-fill high" style="width: 100%;"></div></div>
+        <span class="bar-value">5</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Virginia</span>
+        <div class="bar-track"><div class="bar-fill high" style="width: 80%;"></div></div>
+        <span class="bar-value">4</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Kansas</span>
+        <div class="bar-track"><div class="bar-fill medium" style="width: 60%;"></div></div>
+        <span class="bar-value">3</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">New York</span>
+        <div class="bar-track"><div class="bar-fill medium" style="width: 40%;"></div></div>
+        <span class="bar-value">2</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Idaho</span>
+        <div class="bar-track"><div class="bar-fill medium" style="width: 40%;"></div></div>
+        <span class="bar-value">2</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Maryland</span>
+        <div class="bar-track"><div class="bar-fill low" style="width: 20%;"></div></div>
+        <span class="bar-value">1</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">New Hampshire</span>
+        <div class="bar-track"><div class="bar-fill low" style="width: 20%;"></div></div>
+        <span class="bar-value">1</span>
+      </div>
+      <div class="bar-row">
+        <span class="bar-label">Alabama</span>
+        <div class="bar-track"><div class="bar-fill low" style="width: 20%;"></div></div>
+        <span class="bar-value">1</span>
+      </div>
+    </div>
+    <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 1rem; font-family: 'Space Mono', monospace; letter-spacing: 0.05em;">
+      Source: Transparency Coalition &middot; Troutman Pepper &middot; Week of March 14&ndash;21, 2026
+    </p>
+  </div>
+
+  <!-- ══════════════════════════════════════════ INDUSTRY ══════ -->
+  <hr class="section-rule">
+  <p class="section-label">Industry Pulse</p>
+  <article>
+    <h3>DeepSeek V4, the Trillion-Parameter Ghost</h3>
+    <span class="source">Source: Technology.org &middot; OpenRouter &middot; March 2026</span>
+
+    <p>DeepSeek&rsquo;s V4 model has become the most anticipated and most delayed release in AI this quarter. The architecture is confirmed: one trillion total parameters with only 32 billion active per token, projecting inference costs of $0.10&ndash;$0.30 per million input tokens &mdash; up to 50x cheaper than GPT-5. The model is natively multimodal, trained simultaneously on text, image, video, and audio rather than bolting capabilities onto a text-only base. And it&rsquo;s optimized for Huawei Ascend chips, demonstrating that frontier AI can be trained on Chinese-made silicon despite U.S. export controls on Nvidia GPUs.</p>
+
+    <p>But V4 hasn&rsquo;t officially launched. Every predicted window &mdash; mid-February, Lunar New Year, early March &mdash; has passed without release. A mystery model called &ldquo;Hunter Alpha&rdquo; appeared on OpenRouter on March 18, matching V4&rsquo;s expected specs, prompting widespread speculation. Meanwhile, 267 new AI models shipped in Q1 2026 alone, most open-source or specialized. The era of a few dominant models is giving way to an ecosystem where the most consequential releases may be the ones nobody announces.</p>
+  </article>
+
+  <article>
+    <h3>The Model Pace: Q1 2026 in Numbers</h3>
+    <span class="source">Source: LLM Stats &middot; Renovate QR &middot; March 2026</span>
+    <p>OpenAI rolled out GPT-5.4 mini to free and Go-tier ChatGPT users. IBM released Granite 4.0 1B Speech, a compact model for multilingual speech recognition requiring under 1.5GB VRAM. Microsoft announced GigaTIME, a model that transforms pathology slides into spatial proteomics maps of cancer cells, trained on 40 million cells across 14,256 patients. Nvidia&rsquo;s &ldquo;Vera Rubin&rdquo; platform and H300 GPUs target trillion-parameter training. The industry is bifurcating: consumer-facing chatbot updates on one track, domain-specific models reshaping medicine, materials science, and biology on the other.</p>
+  </article>
+
+  <!-- ══════════════════════════════════════════ OKLAHOMA ══════ -->
+  <hr class="section-rule">
+  <p class="section-label">Oklahoma Focus</p>
+
+  <div class="ok-grid">
+
+    <div class="ok-card">
+      <h4>Oklahoma&rsquo;s AI Bill Surge: Five Bills Target Deepfakes, Agencies, Personhood</h4>
+      <span class="source">The Frontier &middot; Oklahoma Legislature &middot; 2026 Session &middot; <a href="https://www.readfrontier.org/stories/oklahoma-lawmakers-file-a-flurry-of-bills-seeking-to-regulate-ai/">The Frontier</a></span>
+      <p>Oklahoma lawmakers filed a cluster of AI regulation bills this session, marking the state&rsquo;s first serious legislative engagement with artificial intelligence. <strong>HB 3545</strong> (Rep. Cody Maynard, R-Durant) restricts high-risk AI use by state agencies, banning systems that manipulate people, enable unlawful discrimination, or conduct real-time biometric surveillance in public spaces. It mandates annual statewide AI reporting.</p>
+      <p><strong>HB 3546</strong> (Maynard) explicitly prohibits granting legal personhood to AI under Oklahoma law. <strong>SB 746</strong> (Sen. Ally Seifried, R-Claremore) requires disclosure of AI-generated political ads depicting real people. <strong>SB 1521</strong> (Sen. Warren Hamilton) restricts AI chatbots designed for minors. <strong>HB 3299</strong> makes distributing synthetic media of someone&rsquo;s likeness without consent unlawful when intended to cause harm.</p>
+      <p>Taken together, Oklahoma is building an AI governance stack from multiple angles &mdash; agency use, legal status, electoral integrity, child safety, and personal rights &mdash; while Chief AI Officer Tai Phan builds the executive branch framework in parallel.</p>
+      <span class="ok-status new">New &mdash; In Committee</span>
+    </div>
+
+    <div class="ok-card">
+      <h4>Well Repurposing Act (HB 3173): Senate Phase Begins</h4>
+      <span class="source">Update from Issue 3 &middot; <a href="https://www.kosu.org/show/stateimpact-oklahoma/2026-03-19/some-of-oklahomas-thousands-of-orphaned-wells-could-find-a-new-purpose-under-this-state-bill">KOSU/StateImpact, March 19</a></span>
+      <p>The Well Repurposing Act passed the full House on March 16 and now enters Senate consideration. KOSU&rsquo;s March 19 coverage brought new attention to the bill, noting that the local Sierra Club chapter is actively advocating for it because orphaned wells &ldquo;create long-term environmental liabilities for communities and taxpayers.&rdquo; Oklahoma has more than 19,000 orphaned wells; at current OCC plugging rates, the backlog would take 235 years to clear.</p>
+      <p>The temperature threshold debate continues. OU researcher Jeff McCaskill argues the 250&deg;F minimum should be lowered to 180&deg;F to make more wells viable for geothermal conversion. The gap between the bill&rsquo;s threshold and practical feasibility remains the key issue to watch as Senate hearings begin. If enacted, the law takes effect November 1, 2026.</p>
+      <span class="ok-status advancing">Advancing &mdash; In Senate</span>
+    </div>
+
+    <div class="ok-card">
+      <h4>Tai Phan&rsquo;s Framework vs. Federal Preemption</h4>
+      <span class="source"><a href="https://www.route-fifty.com/artificial-intelligence/2026/02/how-oklahoma-has-embraced-accountable-innovation/411459/">Route Fifty</a> &middot; Adobe Government Forum &middot; Ongoing</span>
+      <p>The federal preemption push creates an immediate tension for Oklahoma&rsquo;s AI governance strategy. Chief AI Officer Tai Phan has spent months building the state&rsquo;s &ldquo;accountable innovation&rdquo; framework &mdash; redefining AI as a governance discipline rather than just a technology deployment. His approach centers on transparency about data sources, workforce amplification over headcount reduction, and early IT involvement in procurement.</p>
+      <p>If the TRUMP AMERICA AI Act passes with broad preemption, it could override Oklahoma&rsquo;s emerging legislative framework before it takes effect. But Phan&rsquo;s executive-branch work &mdash; internal agency standards, procurement guidelines, workforce training &mdash; may be more durable than statute, precisely because it operates below the preemption line. States that embed AI governance into operational practice rather than statute alone may prove more resilient to federal override.</p>
+      <span class="ok-status active">Active &mdash; Framework Development</span>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════ CONNECTIONS ══════ -->
+  <hr class="section-rule">
+  <p class="section-label">The Thread</p>
+  <article>
+    <p>Every story in this issue is about the same question: <strong>who gets to set the rules for systems that are already running?</strong></p>
+    <p>The federal government wants to preempt state AI laws &mdash; but Congress has rejected preemption twice, and states passed more AI bills this week than the federal government has passed in three years. AI agents are operating inside 80% of Fortune 500 companies, but only 6% have the security infrastructure to govern them. DeepSeek&rsquo;s trillion-parameter model hasn&rsquo;t officially launched, but a mystery model matching its specs appeared on a public API &mdash; governance by announcement is already obsolete when the technology arrives before the press release.</p>
+    <p>Oklahoma is an instructive case study. The state is building AI governance on three parallel tracks: legislative (five bills targeting specific harms), executive (Phan&rsquo;s operational framework), and infrastructure (repurposing physical wells while governing digital ones). That layered approach may be more resilient than any single statute &mdash; especially if federal preemption narrows what states can legislate but can&rsquo;t touch how they operate.</p>
+    <p>The Structured Emergence principle applies: governance that lives in the relationships between institutions &mdash; between legislature and executive, between state and federal, between policy and practice &mdash; is harder to displace than governance that lives in any single law. The states building governance as a practice, not just a legal text, are the ones that will still be governing when the next model drops.</p>
+  </article>
+
+</main>
+
+<footer class="footer">
+  <p>
+    The Inference &middot; Issue 4 &middot; March 21, 2026<br>
+    Published by <a href="https://humanityandai.com">Humanity and AI</a><br>
+    Research: <a href="https://structuredemergence.com">Structured Emergence</a><br><br>
+    &copy; 2026 Humanity and AI LLC. All rights reserved.
+  </p>
+</footer>
+
+</body>
+</html>
