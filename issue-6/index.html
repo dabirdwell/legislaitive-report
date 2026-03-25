@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Inference — Issue 6 | Humanity and AI</title>
+<meta name="description" content="AI policy intelligence brief. Issue 6: The Enforcement Illusion, EU AI Act Delays, Supreme Court on AI Authorship, Oklahoma's Data Center Energy Fight.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #161616;
+    --bg-surface: #1c1c1c;
+    --bg-elevated: #222222;
+    --text: #e0dcd8;
+    --text-muted: #a09890;
+    --text-dim: #6b6560;
+    --primary-brown: #d4a574;
+    --accent-amber: #d4876a;
+    --accent-warm: #BF6745;
+    --border: #3a3530;
+    --border-light: #2a2520;
+    --red-alert: #c45c4a;
+    --green-ok: #6a9a6a;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Masthead ── */
+  .masthead {
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+  }
+  .masthead-logo {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 3rem;
+    color: var(--primary-brown);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+  }
+  .masthead-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    margin-top: 0.3rem;
+  }
+  .masthead-issue {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── Layout ── */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── Section headings ── */
+  .section-rule {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 3rem 0 0;
+  }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent-amber);
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    margin: 2rem 0 1rem;
+  }
+
+  /* ── Lead story ── */
+  .lead {
+    margin: 2.5rem 0 2rem;
+  }
+  .lead h2 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .lead-deck {
+    font-size: 1.15rem;
+    color: var(--accent-amber);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .lead p {
+    margin-bottom: 1rem;
+  }
+
+  /* ── Stat callout ── */
+  .stat-callout {
+    background: var(--bg-surface);
+    border-left: 3px solid var(--accent-warm);
+    padding: 1.2rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .stat-callout .stat-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent-amber);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .stat-callout .stat-label {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* ── Article blocks ── */
+  article {
+    margin: 2.5rem 0;
+  }
+  article h3 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+  }
+  article p {
+    margin-bottom: 1rem;
+  }
+
+  /* ── Source tags ── */
+  .source {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  /* ── Data point / chart ── */
+  .data-section {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  .data-section h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent-amber);
+    margin-bottom: 1.5rem;
+  }
+  .bar-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .bar-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    width: 140px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .bar-track {
+    flex: 1;
+    height: 20px;
+    background: var(--bg-elevated);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s ease;
+  }
+  .bar-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text);
+    width: 40px;
+    flex-shrink: 0;
+  }
+  .bar-fill.high    { background: var(--red-alert); }
+  .bar-fill.medium  { background: var(--accent-warm); }
+  .bar-fill.low     { background: var(--primary-brown); }
+  .bar-fill.minimal { background: var(--text-dim); }
+
+  /* ── Oklahoma focus ── */
+  .ok-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0;
+  }
+  .ok-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem;
+  }
+  .ok-card h4 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .ok-card p {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+  .ok-status {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 0.3rem;
+  }
+  .ok-status.advancing {
+    background: rgba(106, 154, 106, 0.15);
+    color: var(--green-ok);
+    border: 1px solid rgba(106, 154, 106, 0.3);
+  }
+  .ok-status.paused {
+    background: rgba(196, 92, 74, 0.12);
+    color: var(--red-alert);
+    border: 1px solid rgba(196, 92, 74, 0.25);
+  }
+  .ok-status.active {
+    background: rgba(212, 165, 116, 0.15);
+    color: var(--primary-brown);
+    border: 1px solid rgba(212, 165, 116, 0.3);
+  }
+  .ok-status.new {
+    background: rgba(212, 135, 106, 0.15);
+    color: var(--accent-amber);
+    border: 1px solid rgba(212, 135, 106, 0.3);
+  }
+  .ok-status.signed {
+    background: rgba(106, 154, 106, 0.2);
+    color: var(--green-ok);
+    border: 1px solid rgba(106, 154, 106, 0.4);
+  }
+
+  /* ── Blockquote / pull quote ── */
+  blockquote {
+    border-left: 3px solid var(--accent-warm);
+    padding: 0.8rem 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+
+  /* ── Strong emphasis ── */
+  strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+    padding: 2rem;
+    text-align: center;
+  }
+  .footer p {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+  }
+  .footer a {
+    color: var(--accent-amber);
+    text-decoration: none;
+  }
+
+  /* ── Links ── */
+  a { color: var(--accent-amber); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Responsive ── */
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .masthead-logo { font-size: 2.2rem; }
+    .lead h2 { font-size: 1.6rem; }
+    .container { padding: 0 1.2rem; }
+    .bar-label { width: 100px; font-size: 0.6rem; }
+    .stat-callout .stat-number { font-size: 1.3rem; }
+  }
+
+  /* ── Print ── */
+  @media print {
+    body { background: #fff; color: #111; font-size: 11pt; }
+    .masthead { border-color: #ccc; }
+    .masthead-logo { color: #491D0C; }
+    .section-label { color: #BF6745; }
+    .stat-callout { border-color: #BF6745; background: #f9f6f3; }
+    .data-section { background: #f9f6f3; border-color: #ddd; }
+    .ok-card { background: #f9f6f3; border-color: #ddd; }
+    .bar-fill.high { background: #c45c4a; }
+    .bar-fill.medium { background: #BF6745; }
+    .bar-fill.low { background: #a0794c; }
+    .bar-fill.minimal { background: #bbb; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-logo">The Inference</div>
+  <div class="masthead-sub">AI Policy Intelligence Brief</div>
+  <div class="masthead-issue">Issue 6 &middot; March 24, 2026 &middot; The Enforcement Illusion</div>
+</header>
+
+<main class="container">
+
+  <!-- ══════════════════════════════════════════ LEAD ══════ -->
+  <div class="lead">
+    <p class="section-label">The Lead</p>
+    <h2>The World&rsquo;s Most Ambitious AI Law<br>Is Already Retreating</h2>
+    <p class="lead-deck">The EU delays its own AI Act enforcement deadlines to 2027&ndash;2028. Only 8 of 27 member states have designated enforcement contacts. The Supreme Court settles the AI authorship question the regulators couldn&rsquo;t. Welcome to the enforcement illusion &mdash; where the laws exist, but the capacity to apply them does not.</p>
+
+    <p>On March 13, the Council of the EU adopted its negotiating position on amendments to the AI Act as part of the &ldquo;Omnibus VII&rdquo; simplification package. The changes are revealing. High-risk AI deadlines for stand-alone systems pushed to December 2, 2027. Embedded high-risk systems delayed to August 2, 2028. Regulatory sandbox requirements postponed to December 2027. SME exemptions extended to small mid-caps. The world&rsquo;s most comprehensive AI governance framework, barely six months past its first enforcement milestone, is already being walked back &mdash; not because the rules were wrong, but because the institutions meant to enforce them aren&rsquo;t ready.</p>
+
+    <p>The implementation gap is stark. As of mid-March, only 8 of the EU&rsquo;s 27 member states have designated the required national enforcement contact points. The AI Office in Brussels has published two drafts of its Transparency Code of Practice, with the second open for feedback until March 30, but codes of practice are not enforcement. They are invitations to self-regulate, and the history of technology self-regulation is not encouraging.</p>
+
+    <div class="stat-callout">
+      <span class="stat-number">8 of 27</span>
+      <span class="stat-label">The number of EU member states that have designated required AI Act enforcement contact points. The remaining 19 have missed or ignored the deadline. A law without enforcers is a suggestion.</span>
+    </div>
+
+    <p>The one institution that moved decisively this month was not a regulator but a court. On March 2, the U.S. Supreme Court denied certiorari in <em>Thaler v. Perlmutter</em>, leaving intact the D.C. Circuit&rsquo;s ruling that the Copyright Act requires human authorship. AI systems cannot be authors or inventors under U.S. law. The decision is narrow &mdash; it says nothing about AI-assisted works with sufficient human direction &mdash; but it is final. While regulators on both sides of the Atlantic negotiate timelines and draft codes of practice, the judiciary settled a foundational question in a single order. No delay. No extension. No simplification package.</p>
+
+    <p>The pattern extends to the U.S. federal framework. The White House released its national AI legislative framework on March 20, calling for seven pillars of governance including federal preemption. But the TRUMP AMERICA AI Act faces the same implementation problem as the EU: it requires enforcement capacities that don&rsquo;t exist, from bias audits to catastrophic risk reporting to DHS. Meanwhile, the states &mdash; messy, fragmented, sometimes contradictory &mdash; continue to pass actual laws. Vermont signed a synthetic media elections bill on March 5. Washington passed five AI bills before adjournment on March 12. Idaho&rsquo;s S 1297 cleared the Senate 21&ndash;12. Pennsylvania&rsquo;s SB 1090 passed 49&ndash;1. The enforcement gap is not an argument for or against any level of government. It is a fact about what governance looks like when ambition outpaces capacity.</p>
+    <span class="source">Sources: EU Council &middot; Hyperight &middot; European Parliament &middot; Holland &amp; Knight &middot; Newsweek &middot; Transparency Coalition &middot; March 2&ndash;24, 2026</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════ ANALYSIS ══════ -->
+  <hr class="section-rule">
+  <p class="section-label">The Analysis</p>
+  <article>
+    <h3>Governance Theater: The Gap Between Passing Laws and Enforcing Them</h3>
+    <span class="source">Sources: EU Council &middot; OECD &middot; Brookings &middot; National Law Review &middot; March 2026</span>
+
+    <p>There is a distinction that almost no AI policy discussion makes clearly enough: <strong>the difference between having a law and having governance.</strong> A law is text. Governance is the institutional capacity to interpret, apply, monitor, and enforce that text against entities with more technical resources than the enforcers possess. By this standard, the global state of AI governance is far weaker than the volume of legislation suggests.</p>
+
+    <p>The EU AI Act is the clearest case study. Passed in March 2024, it is the most comprehensive AI regulatory framework ever enacted. Its risk-based classification system, transparency obligations, and conformity assessment requirements represent years of deliberation. And yet: two years later, the enforcement architecture is incomplete. National competent authorities in most member states have not been designated. The AI Office has a staff of roughly 140 people to oversee compliance across a market of 450 million people and the world&rsquo;s second-largest digital economy. The Omnibus VII amendments are not corrections to bad policy &mdash; they are acknowledgments that the institutions built to enforce good policy cannot keep pace with deployment.</p>
+
+    <blockquote>A regulatory framework without enforcement capacity is not a framework. It is an aspiration with a compliance deadline. The EU AI Act is discovering what every ambitious governance project discovers: the hard part is not writing the rules. The hard part is building the institutions to apply them.</blockquote>
+
+    <p>The United States faces a mirror image of the same problem. Where the EU has one comprehensive law and insufficient enforcement infrastructure, the U.S. has no comprehensive federal law and 1,561 state bills creating a patchwork that no single entity can monitor. The AMERICA AI Act proposes to solve fragmentation through preemption, but its own enforcement requirements &mdash; third-party bias audits, catastrophic risk reporting to DHS, quarterly workforce impact assessments &mdash; assume institutional capacities that do not currently exist at the federal level. The FTC, which would shoulder significant enforcement responsibility, has seen its budget flatline while the number of AI-deploying entities it oversees has grown exponentially.</p>
+
+    <p>The judiciary, by contrast, is demonstrating what enforcement actually looks like. The Supreme Court&rsquo;s denial of certiorari in <em>Thaler</em> settled the AI authorship question without a multi-year rulemaking process. In the same month, U.S. District Judge Jed Rakoff ruled in a matter of first impression that litigation-related communications with generative AI platforms are not protected by attorney-client privilege &mdash; a decision with immediate, concrete consequences for every law firm using AI tools. Courts move slowly by design, but when they act, the results are binding. Regulators move quickly on paper and slowly in practice.</p>
+
+    <p>The Structured Emergence lens from previous issues applies here with particular force. In Issue 4, we argued that governance living in the relationships between institutions is harder to displace than governance in any single law. The enforcement illusion reveals the corollary: governance that exists only as legislation, without the institutional relationships to apply it, is governance in name only. The states passing AI bills are building real governance only if they also build the enforcement mechanisms &mdash; attorneys general with technical staff, audit infrastructure, complaint systems. The EU passed the world&rsquo;s best AI law. The question is whether it can build the world&rsquo;s first AI enforcement apparatus before the law becomes irrelevant.</p>
+  </article>
+
+  <!-- ══════════════════════════════════════════ DATA POINT ══════ -->
+  <hr class="section-rule">
+  <div class="data-section">
+    <h3>Data Point &mdash; EU AI Act: Law vs. Enforcement Readiness</h3>
+    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.2rem; font-family: 'Cormorant Garamond', serif;">
+      The gap between legislative ambition and institutional capacity. Each bar shows the percentage of required enforcement infrastructure in place as of March 2026.
+    </p>
+    <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+      <!-- Background -->
+      <rect width="700" height="320" fill="none"/>
+
+      <!-- Grid lines -->
+      <line x1="200" y1="30" x2="200" y2="280" stroke="#2a2520" stroke-width="1"/>
+      <line x1="325" y1="30" x2="325" y2="280" stroke="#2a2520" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="450" y1="30" x2="450" y2="280" stroke="#2a2520" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="575" y1="30" x2="575" y2="280" stroke="#2a2520" stroke-width="1" stroke-dasharray="4,4"/>
+      <line x1="670" y1="30" x2="670" y2="280" stroke="#2a2520" stroke-width="1"/>
+
+      <!-- Axis labels -->
+      <text x="200" y="300" fill="#6b6560" font-family="Space Mono, monospace" font-size="9" text-anchor="middle">0%</text>
+      <text x="325" y="300" fill="#6b6560" font-family="Space Mono, monospace" font-size="9" text-anchor="middle">25%</text>
+      <text x="450" y="300" fill="#6b6560" font-family="Space Mono, monospace" font-size="9" text-anchor="middle">50%</text>
+      <text x="575" y="300" fill="#6b6560" font-family="Space Mono, monospace" font-size="9" text-anchor="middle">75%</text>
+      <text x="670" y="300" fill="#6b6560" font-family="Space Mono, monospace" font-size="9" text-anchor="middle">100%</text>
+
+      <!-- Row 1: Legislative text -->
+      <text x="190" y="58" fill="#a09890" font-family="Space Mono, monospace" font-size="10" text-anchor="end">Legislative text</text>
+      <rect x="200" y="42" width="470" height="22" rx="3" fill="#222222"/>
+      <rect x="200" y="42" width="470" height="22" rx="3" fill="#6a9a6a"/>
+      <text x="680" y="58" fill="#e0dcd8" font-family="Space Mono, monospace" font-size="10" font-weight="700">100%</text>
+
+      <!-- Row 2: Codes of Practice -->
+      <text x="190" y="98" fill="#a09890" font-family="Space Mono, monospace" font-size="10" text-anchor="end">Codes of Practice</text>
+      <rect x="200" y="82" width="470" height="22" rx="3" fill="#222222"/>
+      <rect x="200" y="82" width="282" height="22" rx="3" fill="#BF6745"/>
+      <text x="490" y="98" fill="#e0dcd8" font-family="Space Mono, monospace" font-size="10" font-weight="700">60%</text>
+
+      <!-- Row 3: National authorities -->
+      <text x="190" y="138" fill="#a09890" font-family="Space Mono, monospace" font-size="10" text-anchor="end">Natl. authorities</text>
+      <rect x="200" y="122" width="470" height="22" rx="3" fill="#222222"/>
+      <rect x="200" y="122" width="139" height="22" rx="3" fill="#c45c4a"/>
+      <text x="347" y="138" fill="#e0dcd8" font-family="Space Mono, monospace" font-size="10" font-weight="700">30%</text>
+
+      <!-- Row 4: Audit infrastructure -->
+      <text x="190" y="178" fill="#a09890" font-family="Space Mono, monospace" font-size="10" text-anchor="end">Audit infra.</text>
+      <rect x="200" y="162" width="470" height="22" rx="3" fill="#222222"/>
+      <rect x="200" y="162" width="70" height="22" rx="3" fill="#c45c4a"/>
+      <text x="280" y="178" fill="#e0dcd8" font-family="Space Mono, monospace" font-size="10" font-weight="700">15%</text>
+
+      <!-- Row 5: Regulatory sandboxes -->
+      <text x="190" y="218" fill="#a09890" font-family="Space Mono, monospace" font-size="10" text-anchor="end">Reg. sandboxes</text>
+      <rect x="200" y="202" width="470" height="22" rx="3" fill="#222222"/>
+      <rect x="200" y="202" width="47" height="22" rx="3" fill="#c45c4a"/>
+      <text x="255" y="218" fill="#e0dcd8" font-family="Space Mono, monospace" font-size="10" font-weight="700">10%</text>
+
+      <!-- Row 6: Complaint systems -->
+      <text x="190" y="258" fill="#a09890" font-family="Space Mono, monospace" font-size="10" text-anchor="end">Complaint systems</text>
+      <rect x="200" y="242" width="470" height="22" rx="3" fill="#222222"/>
+      <rect x="200" y="242" width="24" height="22" rx="3" fill="#c45c4a"/>
+      <text x="232" y="258" fill="#e0dcd8" font-family="Space Mono, monospace" font-size="10" font-weight="700">5%</text>
+    </svg>
+    <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 1rem; font-family: 'Space Mono', monospace; letter-spacing: 0.05em;">
+      Source: EU Council &middot; European Parliament Think Tank &middot; Hyperight &middot; March 2026<br>
+      Note: Estimates based on publicly reported implementation status across EU-27
+    </p>
+  </div>
+
+  <!-- ══════════════════════════════════════════ OKLAHOMA ══════ -->
+  <hr class="section-rule">
+  <p class="section-label">Oklahoma Focus</p>
+
+  <div class="ok-grid">
+
+    <div class="ok-card">
+      <h4>HB 3917: Oklahoma Takes On Data Center Energy Costs</h4>
+      <span class="source">Oklahoma Legislature &middot; News9 &middot; March 2026</span>
+      <p><strong>HB 3917</strong> (Rep. Mickey Dollens, D-Oklahoma City) would require large data centers to pay surcharges during peak electricity demand periods. The bill creates a <strong>Grid Modernization Revolving Fund</strong> within the State Treasury to finance infrastructure upgrades and limit rate impacts on residential customers. It passed unanimously out of the Appropriations and Budget Natural Resources Subcommittee and awaits full committee consideration.</p>
+      <p>The bill addresses a question that every state courting AI infrastructure must answer: who pays when data centers strain the grid? Oklahoma&rsquo;s approach &mdash; making data centers internalize their peak-demand costs rather than socializing them onto residential ratepayers &mdash; is a governance model that treats AI infrastructure as an energy policy question, not just a tech policy question. As AI compute demand grows exponentially, the states that get energy governance right will determine where the next generation of data centers are built.</p>
+      <span class="ok-status advancing">Advancing &mdash; In Committee</span>
+    </div>
+
+    <div class="ok-card">
+      <h4>SB 480 Signed: Behind-the-Meter Energy for Data Centers</h4>
+      <span class="source">News9 &middot; Oklahoma Legislature &middot; March 2026</span>
+      <p>Governor Stitt signed <strong>SB 480</strong> into law, allowing qualifying businesses &mdash; including AI data centers &mdash; to develop, own, and operate their own electric generation facilities rather than relying solely on the public grid. The law requires a natural gas generation component and passed both chambers unanimously. It takes effect July 1.</p>
+      <p>Read alongside HB 3917, the picture sharpens: Oklahoma is simultaneously inviting data centers to build their own power (SB 480) and ensuring they pay for the grid impact when they draw from public infrastructure (HB 3917). Carrot and stick, energy edition. The combination positions Oklahoma as a state that wants AI infrastructure but won&rsquo;t let it free-ride on existing ratepayers &mdash; a policy balance few states have attempted.</p>
+      <span class="ok-status signed">Signed &mdash; Effective July 1</span>
+    </div>
+
+    <div class="ok-card">
+      <h4>SB 1734: Responsible Technology in Schools Act</h4>
+      <span class="source">Oklahoma Legislature &middot; 2026 Session</span>
+      <p><strong>SB 1734</strong>, the Responsible Technology in Schools Act, prohibits AI tools in classrooms except through educator-directed use and bars AI as the primary basis for grading, discipline, or promotion decisions. The bill addresses the growing concern that AI tutoring and assessment tools are being deployed in schools without adequate oversight of their accuracy or impact on student development.</p>
+      <p>This is a new vector in Oklahoma&rsquo;s layered AI governance approach. Previous issues tracked the state&rsquo;s work on agency use (HB 3545), legal personhood (HB 3546), electoral integrity (SB 746), child safety (SB 1521), and personal rights (HB 3299). Education makes six. Oklahoma is quietly assembling the most comprehensive state-level AI governance portfolio in the country &mdash; not through one sweeping bill, but through targeted legislation addressing specific domains.</p>
+      <span class="ok-status active">Active &mdash; In Committee</span>
+    </div>
+
+    <div class="ok-card">
+      <h4>SB 1521 Update: AI Chatbot Protections for Minors Advances 8&ndash;0</h4>
+      <span class="source">KOSU &middot; Oklahoma Legislature &middot; February&ndash;March 2026</span>
+      <p><strong>SB 1521</strong> (Sen. Warren Hamilton, R-McCurtain) passed the Senate Technology and Telecommunications Committee 8&ndash;0 on February 19 and continues advancing. The bill requires age verification via state-issued ID, bans AI chatbots that encourage minors toward sexually explicit content, suicide, self-harm, or violence, and imposes penalties up to <strong>$100,000 per violation</strong>, enforceable by the state attorney general.</p>
+      <p>The unanimous committee vote mirrors HB 3545&rsquo;s 96&ndash;0 House vote from Issue 5 &mdash; a consistent signal that AI child safety commands absolute bipartisan consensus in Oklahoma. With 78 chatbot bills alive in 27 states nationally, Oklahoma&rsquo;s version is among the most aggressive in enforcement mechanism.</p>
+      <span class="ok-status advancing">Advancing &mdash; Senate Floor</span>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════ SIGNAL ══════ -->
+  <hr class="section-rule">
+  <p class="section-label">The Signal</p>
+
+  <article>
+    <h3>The Authorship Line: Supreme Court Closes the Door on AI Inventors</h3>
+    <span class="source">Sources: Holland &amp; Knight &middot; Baker Donelson &middot; Newsweek &middot; March 2, 2026</span>
+    <p>The Supreme Court&rsquo;s denial of certiorari in <em>Thaler v. Perlmutter</em> is now the definitive statement on AI and authorship in U.S. law. Dr. Stephen Thaler sought copyright protection for art created autonomously by his AI system DABUS. The Court&rsquo;s refusal to hear the case leaves the D.C. Circuit ruling intact: the Copyright Act requires human authorship. Period. Businesses can protect AI-assisted works only where there is &ldquo;sufficient human involvement&rdquo; in directing, prompting, or altering the output. The practical implication: every company using generative AI for content creation now needs a documented human-in-the-loop process &mdash; not for ethics, but for intellectual property protection.</p>
+  </article>
+
+  <article>
+    <h3>The Privilege Crack: AI Communications Are Not Attorney-Client Protected</h3>
+    <span class="source">Sources: Regulatory Oversight &middot; DLA Piper &middot; March 2026</span>
+    <p>U.S. District Judge Jed Rakoff (S.D.N.Y.) ruled in a matter of first impression that litigation-related communications with generative AI platforms are not protected by attorney-client privilege. The logic is direct: attorney-client privilege requires a confidential communication between a client and their attorney. When you send a prompt to ChatGPT, you are communicating with a third-party service, not your lawyer. The ruling has immediate consequences for every law firm and corporate legal department using AI tools for litigation strategy, document review, or case analysis. If it&rsquo;s discoverable, it&rsquo;s a liability.</p>
+  </article>
+
+  <article>
+    <h3>The Copyright Counterattack: AMERICA AI Act Says Training Isn&rsquo;t Fair Use</h3>
+    <span class="source">Sources: Axios &middot; National Law Review &middot; March 18&ndash;20, 2026</span>
+    <p>Buried in the AMERICA AI Act&rsquo;s 291 pages is a provision that could reshape the AI industry&rsquo;s economic foundation: the bill explicitly declares that &ldquo;unauthorized reproduction, copying, or computational processing of copyrighted works&rdquo; for AI training is <strong>not fair use</strong> under the Copyright Act. If enacted, this would resolve in creators&rsquo; favor the central legal question in the <em>New York Times v. OpenAI</em> litigation and dozens of similar cases. Combined with the NO FAKES Act provisions for unauthorized use of likenesses, the bill represents the most aggressive congressional assertion of IP rights against AI companies to date.</p>
+  </article>
+
+  <article>
+    <h3>The State Momentum: 78 Chatbot Bills in 27 States</h3>
+    <span class="source">Sources: Multistate AI &middot; Transparency Coalition &middot; Troutman Pepper &middot; March 23, 2026</span>
+    <p>The state AI legislative surge shows no sign of slowing. The count now stands at 1,561 bills across 45 states for the 2026 session alone, with 78 bills specifically targeting AI chatbot interactions with minors across 27 states. Vermont Governor Phil Scott signed a synthetic media elections bill on March 5. Washington completed its session having passed five AI bills. Pennsylvania&rsquo;s SB 1090 cleared the Senate 49&ndash;1. The pattern is consistent: where Congress debates frameworks, states pass laws. And where the EU delays enforcement, American state attorneys general are already building enforcement capacity. The democratic energy remains at the state level, regardless of what the federal preemption debate concludes.</p>
+  </article>
+
+  <!-- ══════════════════════════════════════════ THREAD ══════ -->
+  <hr class="section-rule">
+  <p class="section-label">The Thread</p>
+  <article>
+    <p>Every story in this issue points to the same uncomfortable truth: <strong>passing an AI law and governing AI are not the same thing.</strong></p>
+    <p>The EU AI Act is the most comprehensive piece of AI legislation ever written. It is also, as of March 2026, largely unenforceable &mdash; its deadlines delayed, its enforcement infrastructure incomplete, its member states unprepared. The AMERICA AI Act is 291 pages of ambition that assumes federal enforcement capacities no one has built. The 1,561 state bills will face their own enforcement reckoning as they move from statute to practice.</p>
+    <p>The judiciary offers a counterpoint. Courts don&rsquo;t write comprehensive frameworks. They answer specific questions &mdash; can AI be an author? are AI chats privileged? &mdash; and their answers are immediately binding. No implementation timeline. No simplification package. No code of practice. The law, applied.</p>
+    <p>Oklahoma&rsquo;s approach is instructive precisely because it is not trying to solve AI governance in a single bill. Six legislative vectors &mdash; agency use, legal personhood, electoral integrity, child safety, personal rights, education &mdash; plus executive-branch operational frameworks, plus the energy governance questions of HB 3917 and SB 480. Each piece is enforceable on its own terms. Each institution can build capacity for its own domain. The governance is distributed not because distribution is elegant, but because distributed governance is governance that can actually be enforced.</p>
+    <p>The Structured Emergence principle completes the picture: the enforcement illusion arises when governance is concentrated in a single ambitious instrument that depends on institutional capacity that doesn&rsquo;t exist. Governance that emerges from multiple institutions, each enforcing within its competence, is messier on paper and more effective in practice. The question for AI policy in 2026 is no longer who should govern AI. It is who <em>can</em> govern AI &mdash; meaning, who has the actual institutional capacity to enforce the rules they write. The answer, increasingly, is courts and states. Not because they&rsquo;re best, but because they&rsquo;re real.</p>
+  </article>
+
+</main>
+
+<footer class="footer">
+  <p>
+    The Inference &middot; Issue 6 &middot; March 24, 2026<br>
+    Published by <a href="https://humanityandai.com">Humanity and AI</a><br>
+    Research: <a href="https://structuredemergence.com">Structured Emergence</a><br><br>
+    &copy; 2026 Humanity and AI LLC. All rights reserved.
+  </p>
+</footer>
+
+</body>
+</html>
