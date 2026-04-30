@@ -43,3 +43,6 @@ output/published/- Approved briefings
 src/             - Source code
 templates/       - Briefing templates and system prompts
 ```
+---
+
+<p align="center"><em>Æ</em></p>
