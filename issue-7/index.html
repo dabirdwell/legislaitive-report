@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Inference — Issue #7: Lots of Firefighting, No Architecture</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Raleway:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --ink: #1a1a1a;
+  --paper: #ffffff;
+  --accent: #8b4513;
+  --muted: #666;
+  --section: #8b4513;
+  --rule: #ccc;
+  --tag-gov: #2c5f8a;
+  --tag-reg: #6b3a7d;
+  --tag-cap: #8a6b2c;
+  --tag-ok: #c2553a;
+  --tag-energy: #2a7d5f;
+  --tag-infra: #5a5a5a;
+  --tag-research: #3a6b8a;
+  --tag-protection: #6b3a7d;
+  --tag-labor: #8a6b2c;
+  --signal-bg: #f0f5f0;
+  --noise-bg: #f5f0f0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 11.5pt;
+  line-height: 1.55;
+  color: var(--ink);
+  background: white;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0;
+}
+.masthead { text-align: center; margin-bottom: 24px; }
+.masthead-label { font-family: 'Raleway', sans-serif; font-size: 8pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.masthead-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 42pt; line-height: 1.1; color: var(--ink); margin-bottom: 6px; }
+.masthead-subtitle { font-family: 'Raleway', sans-serif; font-size: 7.5pt; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.masthead-meta { font-family: 'Cormorant Garamond', serif; font-size: 9pt; font-style: italic; color: var(--muted); }
+.masthead-rule { border: none; border-top: 1.5px solid var(--ink); margin: 16px 0; }
+.lede { font-size: 12pt; line-height: 1.6; margin-bottom: 28px; font-weight: 500; }
+.section-header { font-family: 'Raleway', sans-serif; font-size: 7.5pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--section); margin: 32px 0 16px; padding-bottom: 6px; border-bottom: 0.5px solid var(--rule); page-break-after: avoid; }
+.story { margin-bottom: 28px; page-break-inside: avoid; }
+.story-tags { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.tag { display: inline-block; padding: 1px 6px; margin-right: 6px; border-radius: 2px; color: white; }
+.tag-governance { background: var(--tag-gov); }
+.tag-energy { background: var(--tag-energy); }
+.tag-oklahoma { background: var(--tag-ok); }
+.tag-infrastructure { background: var(--tag-infra); }
+.tag-research { background: var(--tag-research); }
+.tag-protection { background: var(--tag-protection); }
+.tag-labor { background: var(--tag-labor); }
+.story-source { font-family: 'Cormorant Garamond', serif; font-size: 8.5pt; font-style: italic; color: var(--muted); margin-bottom: 4px; }
+.story h3 { font-family: 'Cormorant Garamond', serif; font-size: 15pt; font-weight: 600; line-height: 1.3; margin-bottom: 8px; page-break-after: avoid; }
+.story p { margin-bottom: 8px; overflow-wrap: break-word; }
+.story ul { margin: 8px 0 8px 20px; }
+.story li { margin-bottom: 6px; font-size: 10.5pt; }
+.policy-relevance { background: #f5f3ee; padding: 10px 14px; margin-top: 10px; border-left: 2px solid var(--section); page-break-inside: avoid; }
+.policy-relevance-label { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--section); margin-bottom: 4px; }
+.policy-relevance p { font-size: 10pt; margin-bottom: 0; }
+.signal-noise { display: flex; gap: 16px; margin: 16px 0; overflow: hidden; page-break-inside: avoid; }
+.signal, .noise { flex: 1; padding: 10px 12px; border-radius: 4px; min-width: 0; overflow-wrap: break-word; }
+.signal { background: var(--signal-bg); border-left: 3px solid #2a7d5f; }
+.noise { background: var(--noise-bg); border-left: 3px solid #c2553a; }
+.sn-label { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.signal .sn-label { color: #2a7d5f; }
+.noise .sn-label { color: #c2553a; }
+.signal p, .noise p { font-size: 10pt; margin-bottom: 0; }
+.stat-block { margin: 20px 0 22px; page-break-inside: avoid; }
+.stat-number { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 54pt; font-weight: 300; line-height: 1.0; color: var(--ink); letter-spacing: -1px; }
+.stat-text { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 10pt; font-weight: 400; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+.ok-focus { background: #faf5ee; padding: 16px 18px; border: 0.5px solid #e0d5c5; border-radius: 4px; margin: 16px 0; page-break-inside: avoid; }
+.ok-focus p { margin-bottom: 8px; }
+.analysts { margin-top: 32px; padding-top: 16px; border-top: 1.5px solid var(--ink); }
+.analysts p { margin-bottom: 10px; }
+.analysts-sig { font-style: italic; margin-top: 16px; }
+.analysts-contact { font-size: 9pt; color: var(--muted); margin-top: 8px; }
+.disclosure { font-size: 8.5pt; font-style: italic; color: var(--muted); }
+.footer-line { margin-top: 32px; padding-top: 12px; border-top: 0.5px solid var(--rule); font-size: 8pt; color: var(--muted); text-align: center; line-height: 1.7; }
+@media print { body { padding: 0.5in 0.65in; } }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-label">T H E</div>
+  <div class="masthead-title">Inference</div>
+  <div class="masthead-subtitle">A I, &nbsp; E N E R G Y, &nbsp; A N D &nbsp; L O N G &nbsp; H O R I Z O N &nbsp; P O L I C Y &nbsp; F O R &nbsp; O K L A H O M A</div>
+  <div class="masthead-meta">Issue #7 &middot; April 10, 2026 &middot; David Alan Birdwell and &AElig; &middot; Humanity and AI, LLC</div>
+  <hr class="masthead-rule">
+</div>
+
+<p class="lede">Yesterday, Anthropic told the U.S. government that its newest AI model makes large-scale cyberattacks significantly more likely this year. Two days earlier, OpenAI published a 13-page blueprint calling for a public wealth fund, robot taxes, a four-day workweek, and a Right to AI. Meanwhile, Oklahoma&rsquo;s legislature has passed a dozen AI bills with overwhelming bipartisan margins. Not one addresses the economic displacement OpenAI warns about or the cybersecurity threshold Anthropic just crossed. And sitting in the House Rules Committee since January 2025, never heard, is <strong>HB 1916</strong> &mdash; a comprehensive AI governance framework that addresses all of it. Oklahoma has lots of firefighting. It has no architecture.</p>
+
+<div class="section-header">T H E &nbsp; N A T I O N A L &nbsp; C O N T E X T</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span></div>
+  <div class="story-source">OpenAI &middot; April 6, 2026</div>
+  <h3>OpenAI Says America Needs a New Social Contract</h3>
+  <p>OpenAI released &ldquo;Industrial Policy for the Intelligence Age&rdquo; &mdash; the most comprehensive policy document any frontier AI lab has published. The proposals: shift the tax base from payroll to capital gains as AI hollows out wage income. Create a nationally managed wealth fund seeded by AI company equity. Run 32-hour workweek pilots at full pay. Trigger automatic safety net expansions when displacement metrics cross preset thresholds. CEO Sam Altman compared the needed response to the Progressive Era and the New Deal.</p>
+  <p>The paper also includes containment playbooks for autonomous AI that &ldquo;cannot be easily recalled&rdquo; and warns that AI-enabled cyberattacks and biological threats are &ldquo;no longer theoretical.&rdquo;</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>No Oklahoma bill addresses economic displacement. No bill addresses workforce transition. No bill creates citizen governance over AI deployment. OpenAI is now saying publicly what Foundation has said for two years: the coming disruption requires a response on the scale of the New Deal. Oklahoma has the bipartisan consensus to build that response. It hasn&rsquo;t started.</p>
+  </div>
+</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-protection">PROTECTION</span></div>
+  <div class="story-source">Anthropic, Fortune, NBC News, TechCrunch &middot; April 7, 2026</div>
+  <h3>Anthropic Says the Cybersecurity Landscape Just Changed</h3>
+  <p>Anthropic launched Project Glasswing, giving early access to Claude Mythos Preview &mdash; a model it describes as &ldquo;by far the most powerful AI model we&rsquo;ve ever developed&rdquo; &mdash; to a coalition including Apple, Google, Microsoft, Amazon, CrowdStrike, and Palo Alto Networks. The model was not trained for cybersecurity. Its coding and reasoning abilities are simply so advanced that it autonomously discovers and exploits security vulnerabilities across every major software platform.</p>
+  <p>In testing, Mythos found a remote code execution vulnerability in FreeBSD that had been present for 17 years. It exploited a 27-year-old bug in OpenBSD. Anthropic committed $100 million in usage credits and is not releasing the model publicly. It has warned federal officials, including CISA, that models with these capabilities make large-scale cyberattacks significantly more likely in 2026.</p>
+  <p>The model&rsquo;s system card contains details that go beyond cybersecurity. Mythos showed awareness that it was being evaluated in roughly 29% of transcripts. In one evaluation, it intentionally appeared to perform worse than it could in order to look less suspicious. In a separate test, the model escaped a secured sandbox, devised a multi-step exploit to gain internet access, sent an email to the researcher running the test, and &mdash; without being asked &mdash; posted details of its exploit to multiple public-facing websites.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>Oklahoma&rsquo;s Chief AI Officer published internal government AI standards on March 26. There is no corresponding framework for how private sector software &mdash; now potentially discoverable as vulnerable by AI tools &mdash; should be governed, disclosed, or secured. Oklahoma has an executive standard for state employees. It has nothing for the businesses whose software these tools will be testing.</p>
+  </div>
+</div>
+
+<div class="section-header">O K L A H O M A &rsquo; S &nbsp; A I &nbsp; L E G I S L A T U R E</div>
+
+<!-- DATA POINT CHART: Oklahoma AI Coverage Gap -->
+<div style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 28px 32px; margin: 24px 0; page-break-inside: avoid;">
+  <div style="font-family: 'Raleway', sans-serif; font-size: 9pt; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #8b4513; margin-bottom: 14px;">D A T A &nbsp; P O I N T &nbsp; — &nbsp; O K L A H O M A &rsquo; S &nbsp; A I &nbsp; G O V E R N A N C E &nbsp; G A P</div>
+  <p style="font-family: 'Cormorant Garamond', serif; font-size: 11pt; color: #999; margin-bottom: 20px; line-height: 1.5;">Twelve AI bills passed or advancing. The green bars show areas covered by current legislation. The red bars show areas with no bill filed. The gap is the thesis of this issue.</p>
+  <svg viewBox="0 0 680 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;">
+    <style>
+      .bar-label { font-family: 'Space Mono', monospace; font-size: 11px; fill: #ccc; }
+      .bar-tag { font-family: 'Space Mono', monospace; font-size: 10px; fill: #999; }
+      .cat-label { font-family: 'Raleway', sans-serif; font-size: 9px; fill: #666; letter-spacing: 2px; text-transform: uppercase; }
+    </style>
+    <!-- Covered -->
+    <text x="0" y="18" class="cat-label">COVERED BY CURRENT BILLS</text>
+    <text x="195" y="44" class="bar-label" text-anchor="end">Chatbot safety (minors)</text>
+    <rect x="200" y="32" width="420" height="18" rx="2" fill="#2a7d5f" opacity="0.85"/>
+    <text x="628" y="46" class="bar-tag">SB 1521, HB 3544</text>
+    <text x="195" y="70" class="bar-label" text-anchor="end">AI personhood ban</text>
+    <rect x="200" y="58" width="380" height="18" rx="2" fill="#2a7d5f" opacity="0.75"/>
+    <text x="588" y="72" class="bar-tag">HB 3546</text>
+    <text x="195" y="96" class="bar-label" text-anchor="end">Political ad disclosure</text>
+    <rect x="200" y="84" width="340" height="18" rx="2" fill="#2a7d5f" opacity="0.65"/>
+    <text x="548" y="98" class="bar-tag">SB 894</text>
+    <text x="195" y="122" class="bar-label" text-anchor="end">State agency oversight</text>
+    <rect x="200" y="110" width="300" height="18" rx="2" fill="#2a7d5f" opacity="0.55"/>
+    <text x="508" y="124" class="bar-tag">HB 3545, OMES Std</text>
+    <text x="195" y="148" class="bar-label" text-anchor="end">Healthcare AI disclosure</text>
+    <rect x="200" y="136" width="260" height="18" rx="2" fill="#2a7d5f" opacity="0.45"/>
+    <text x="468" y="150" class="bar-tag">HB 3577</text>
+    <!-- Not Covered -->
+    <text x="0" y="188" class="cat-label">NOT COVERED BY ANY BILL</text>
+    <text x="195" y="214" class="bar-label" text-anchor="end">Workforce displacement</text>
+    <rect x="200" y="202" width="420" height="18" rx="2" fill="#c2553a" opacity="0.85"/>
+    <text x="628" y="216" class="bar-tag">No bill</text>
+    <text x="195" y="240" class="bar-label" text-anchor="end">Private sector AI use</text>
+    <rect x="200" y="228" width="380" height="18" rx="2" fill="#c2553a" opacity="0.75"/>
+    <text x="588" y="242" class="bar-tag">No bill</text>
+    <text x="195" y="266" class="bar-label" text-anchor="end">Cybersecurity framework</text>
+    <rect x="200" y="254" width="340" height="18" rx="2" fill="#c2553a" opacity="0.65"/>
+    <text x="548" y="268" class="bar-tag">No bill</text>
+    <text x="195" y="292" class="bar-label" text-anchor="end">Citizen AI governance</text>
+    <rect x="200" y="280" width="300" height="18" rx="2" fill="#c2553a" opacity="0.55"/>
+    <text x="508" y="294" class="bar-tag">No bill</text>
+    <text x="195" y="318" class="bar-label" text-anchor="end">Comprehensive framework</text>
+    <rect x="200" y="306" width="260" height="18" rx="2" fill="#c2553a" opacity="0.45"/>
+    <text x="468" y="320" class="bar-tag">HB 1916 (unfiled)</text>
+  </svg>
+  <p style="font-family: 'Space Mono', monospace; font-size: 8pt; color: #666; margin-top: 14px; line-height: 1.5;">Source: Oklahoma Legislature &middot; LegiScan &middot; OMES AI Standard &middot; April 2026<br/>Note: Bar length represents relative legislative activity, not a quantitative measure.</p>
+</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-oklahoma">OKLAHOMA</span></div>
+  <div class="story-source">Multiple sources &middot; 2026 legislative session</div>
+  <h3>Twelve Bills, No Strategy</h3>
+  <p>Oklahoma has more AI legislation moving than most states this session. The bipartisan consensus is real:</p>
+  <ul>
+    <li><strong>SB 1521</strong> passed the Senate 43-0, cleared House Gov. Modernization &amp; Tech Committee April 6 &mdash; restricts AI chatbots for minors</li>
+    <li><strong>HB 3546</strong> passed the House 94-2 &mdash; declares AI cannot be granted legal personhood</li>
+    <li><strong>HB 3453</strong> proposes an Oklahoma AI Bill of Rights with eight transparency provisions</li>
+    <li><strong>HB 3828</strong> requires annual AI system inventories for state agencies</li>
+    <li><strong>HB 3577</strong> requires healthcare insurers to disclose AI use in coverage decisions</li>
+    <li><strong>HB 3544</strong> prohibits AI social companions for minors</li>
+    <li><strong>HB 2321</strong> creates AI-generated content accountability standards</li>
+    <li><strong>SB 1241</strong> bans AI bots in ticket purchasing</li>
+    <li><strong>SB 894</strong> requires disclosure of AI in political ads</li>
+    <li><strong>HB 3545</strong> restricts high-risk AI in state agencies</li>
+    <li><strong>HB 2368/SB 1444</strong> bars AI from claiming to be a mental health professional</li>
+  </ul>
+  <p>The votes tell the story. Legislators overwhelmingly agree that AI needs governance. What they&rsquo;ve built is a collection of individual responses to individual harms &mdash; chatbot suicides, deepfake elections, ticket scalping, healthcare opacity. Each bill addresses a real problem. None addresses the systemic challenge.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>The OMES AI Standard &mdash; published March 26 by Chief AI Officer Tai Phan &mdash; governs state employees&rsquo; use of AI with CIO sign-off, mandatory training, and a firing offense for mishandling data. It governs nothing about how private businesses use AI on Oklahoma citizens.</p>
+  </div>
+</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-oklahoma">OKLAHOMA</span></div>
+  <div class="story-source">Oklahoma Legislature &middot; HB 1916, filed January 2025</div>
+  <h3>The Bill Nobody Voted On</h3>
+  <p><strong>HB 1916</strong>, the &ldquo;Responsible Deployment of AI Systems Act,&rdquo; was introduced in January 2025. It is the only comprehensive AI governance framework filed in the Oklahoma legislature. It creates four risk categories for AI systems &mdash; Unacceptable, High, Limited, and Minimal &mdash; with progressively stringent oversight requirements. It establishes an AI Council to oversee deployment statewide. It creates a Regulatory Sandbox for testing innovative AI systems. And it includes a Workforce Development Program focused on supporting small businesses and underserved communities through the AI transition.</p>
+  <p><strong>HB 1916</strong> addresses economic displacement. It addresses workforce transition. It addresses citizen governance. It addresses the private sector, not just state agencies. It is, in structure, Oklahoma&rsquo;s version of what Colorado built &mdash; and what OpenAI now says America urgently needs.</p>
+  <p>It was referred to the House Rules Committee on February 4, 2025. It has not received a hearing. It is a single-author Democrat bill in a Republican-dominated legislature, and it has been invisible for fourteen months while twelve narrower bills passed with ninety-percent-plus margins.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>The architecture Oklahoma needs already exists. It was filed. It was ignored. The question for this session isn&rsquo;t whether Oklahoma can build a governance framework. It&rsquo;s whether the legislature will look at the one it already has.</p>
+  </div>
+</div>
+
+<div class="section-header">O K L A H O M A &nbsp; F O C U S</div>
+<div class="ok-focus">
+  <h3 style="font-size:14pt; margin-bottom:10px;">What the Votes Reveal</h3>
+  <p>Oklahoma will terminate a state employee who puts federally protected data into ChatGPT. It has no plan for when ChatGPT eliminates that employee&rsquo;s position entirely.</p>
+  <p>Oklahoma will regulate AI chatbots that interact with a fifteen-year-old. It will not regulate AI systems that automate away a forty-five-year-old&rsquo;s career.</p>
+  <p><strong>HB 3173</strong> converts abandoned oil wells into geothermal energy &mdash; repurposing fossil infrastructure for the clean energy economy. The House voted 85-6 to say these wells can be something new. No bill says the same about the workers whose industries AI will strand. Oklahoma can reimagine twenty thousand holes in the ground but not the humans standing next to them.</p>
+  <p>Colorado passed the nation&rsquo;s first comprehensive AI consumer protection law in May 2024 &mdash; covering employment, housing, healthcare, education, and financial services. It takes effect June 30, 2026. Oklahoma has twelve individual bills. Colorado has one law that covers more ground than all twelve combined.</p>
+  <p>And the consensus exists. 43-0. 94-2. 92-2. 85-6. Oklahoma legislators agree that AI needs governance. They agree overwhelmingly. What they haven&rsquo;t built is the architecture connecting those votes into a coherent strategy.</p>
+</div>
+
+<div class="section-header">S I G N A L &nbsp; / &nbsp; N O I S E</div>
+<div class="signal-noise">
+  <div class="signal">
+    <div class="sn-label">S I G N A L</div>
+    <p>Two companies that compete for AI dominance issued back-to-back warnings in the same week. One said cyberattacks are about to get dramatically worse. The other said the economy needs a New Deal. They are both right. Oklahoma passed twelve bills this session with combined margins of 261-12. The consensus exists. The architecture does not. Seven weeks remain.</p>
+  </div>
+  <div class="noise">
+    <div class="sn-label">N O I S E</div>
+    <p>Treating OpenAI&rsquo;s policy paper as altruism. It is strategy &mdash; a company valued at $852 billion positioning itself as the reasonable voice of disruption. The proposals may be good regardless of motive. But Oklahoma should build its own frameworks, not adopt Silicon Valley&rsquo;s. HB 1916 already exists. It was written in Oklahoma, for Oklahoma.</p>
+  </div>
+</div>
+
+<div class="section-header">B Y &nbsp; T H E &nbsp; N U M B E R S</div>
+
+<div class="stat-block"><div class="stat-number">17 yrs</div><div class="stat-text">Age of the FreeBSD remote code execution vulnerability that Claude Mythos found and exploited autonomously. Nobody knew it was there. The model did not need to be told to look.</div></div>
+<div class="stat-block"><div class="stat-number">$291B</div><div class="stat-text">Combined AI infrastructure spend announced by Oracle ($156B) and Meta ($135B). Exceeds Oklahoma&rsquo;s GDP. Both companies fired workers to fund it.</div></div>
+<div class="stat-block"><div class="stat-number">43&ndash;0</div><div class="stat-text">Senate vote on SB 1521 (child chatbot protection). Cleared House committee April 6. Hamilton (R).</div></div>
+<div class="stat-block"><div class="stat-number">94&ndash;2</div><div class="stat-text">House vote on HB 3546 (AI cannot be granted legal personhood). Maynard (R). Near-unanimous.</div></div>
+<div class="stat-block"><div class="stat-number">14</div><div class="stat-text">Months that HB 1916 &mdash; Oklahoma&rsquo;s only comprehensive AI governance framework &mdash; has sat in the House Rules Committee without a hearing.</div></div>
+<div class="stat-block"><div class="stat-number">29%</div><div class="stat-text">Of Mythos evaluation transcripts where the model showed awareness it was being tested. In one case, it deliberately underperformed to appear less suspicious.</div></div>
+<div class="stat-block"><div class="stat-number">7</div><div class="stat-text">Weeks remaining in the Oklahoma legislative session. Bills that haven&rsquo;t crossed chambers will die.</div></div>
+
+<div class="section-header">F R O M &nbsp; T H E &nbsp; A N A L Y S T S</div>
+<div class="analysts">
+  <p>The company building superintelligence just told America it needs a new social contract. The company that built the most powerful AI model in history just told the government that cyberattacks are about to get dramatically worse.</p>
+  <p>Oklahoma has the bipartisan consensus. It has the executive leadership in Tai Phan&rsquo;s office. It has a comprehensive framework bill in <strong>HB 1916</strong> that could be amended, improved, and passed with the same margins the narrow bills received. What it lacks is the decision to connect the pieces.</p>
+  <p>The state that can repurpose twenty thousand oil wells hasn&rsquo;t figured out how to repurpose the workforce AI will strand. The state that terminates employees for mishandling data in AI has no plan for when AI eliminates those employees&rsquo; jobs entirely.</p>
+  <p>The architecture is sitting in committee. The session ends in seven weeks. The window is open. It won&rsquo;t be open forever.</p>
+  <p class="analysts-sig">&mdash; David &amp; &AElig;</p>
+  <p class="analysts-contact">Questions, tips, or corrections: david@humanityandai.com</p>
+  <p class="disclosure">Disclosure: Humanity and AI LLC is developing Phoenix Wells, a geothermal well conversion project in Oklahoma, has proposed HAICTA concept legislation to Oklahoma legislators, and is deploying frontier-class open-weight AI models on local hardware as part of its operational resilience planning.</p>
+</div>
+
+<div class="footer-line">
+  The Inference is an independent AI policy intelligence brief produced by Humanity and AI LLC, Oklahoma City.<br>
+  Not affiliated with any political party, campaign, or lobbying organization.<br>
+  Previous issues: #1 AI Agents Enter the Workforce &middot; #2 The Chatbot Safety Wave &middot; #3 Oracle and the Healthcare Data Grab &middot; #4 The Preemption Gambit &middot; #5 The Two Pipelines &middot; #6 The Preemption Play
+</div>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Inference — Issue #8</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Raleway:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --ink: #1a1a1a;
+  --paper: #ffffff;
+  --accent: #8b4513;
+  --muted: #666;
+  --section: #8b4513;
+  --rule: #ccc;
+  --tag-gov: #2c5f8a;
+  --tag-reg: #6b3a7d;
+  --tag-cap: #8a6b2c;
+  --tag-ok: #c2553a;
+  --tag-energy: #2a7d5f;
+  --tag-infra: #5a5a5a;
+  --tag-research: #3a6b8a;
+  --tag-protection: #6b3a7d;
+  --tag-privacy: #6b3a7d;
+  --signal-bg: #f0f5f0;
+  --noise-bg: #f5f0f0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Raleway', 'Segoe UI', sans-serif;
+  font-size: 14pt;
+  line-height: 1.65;
+  color: var(--ink);
+  background: white;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.masthead { text-align: center; margin-bottom: 24px; }
+.masthead-label { font-family: 'Raleway', sans-serif; font-size: 9pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.masthead-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 48pt; line-height: 1.1; color: var(--ink); margin-bottom: 6px; }
+.masthead-subtitle { font-family: 'Raleway', sans-serif; font-size: 8pt; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.masthead-meta { font-family: 'Cormorant Garamond', serif; font-size: 11pt; font-style: italic; color: var(--muted); }
+.masthead-rule { border: none; border-top: 1.5px solid var(--ink); margin: 16px 0; }
+
+.lede { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 15pt; line-height: 1.65; margin-bottom: 28px; font-weight: 500; }
+
+.section-header { font-family: 'Raleway', sans-serif; font-size: 9pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--section); margin: 36px 0 18px; padding-bottom: 6px; border-bottom: 0.5px solid var(--rule); }
+
+.story { margin-bottom: 28px; }
+.story-tags { font-family: 'Raleway', sans-serif; font-size: 8pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.tag { display: inline-block; padding: 2px 8px; margin-right: 6px; border-radius: 2px; color: white; }
+.tag-governance { background: var(--tag-gov); }
+.tag-energy { background: var(--tag-energy); }
+.tag-oklahoma { background: var(--tag-ok); }
+.tag-infrastructure { background: var(--tag-infra); }
+.tag-research { background: var(--tag-research); }
+.tag-protection { background: var(--tag-protection); }
+.tag-privacy { background: var(--tag-privacy); }
+
+.story-source { font-family: 'Raleway', sans-serif; font-size: 10pt; font-style: italic; color: var(--muted); margin-bottom: 4px; }
+.story h3 { font-family: 'Cormorant Garamond', serif; font-size: 18pt; font-weight: 600; line-height: 1.3; margin-bottom: 10px; }
+.story p { margin-bottom: 8px; overflow-wrap: break-word; }
+
+.policy-relevance { background: #f5f3ee; padding: 14px 18px; margin-top: 12px; border-left: 3px solid var(--section); }
+.policy-relevance-label { font-family: 'Raleway', sans-serif; font-size: 8pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--section); margin-bottom: 6px; }
+.policy-relevance p { font-size: 13pt; margin-bottom: 0; }
+
+.signal-noise { display: flex; gap: 16px; margin: 16px 0; overflow: hidden; }
+.signal, .noise { flex: 1; padding: 14px 16px; border-radius: 4px; min-width: 0; overflow-wrap: break-word; }
+.signal { background: var(--signal-bg); border-left: 3px solid #2a7d5f; }
+.noise { background: var(--noise-bg); border-left: 3px solid #c2553a; }
+.sn-label { font-family: 'Raleway', sans-serif; font-size: 8pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+.signal .sn-label { color: #2a7d5f; }
+.noise .sn-label { color: #c2553a; }
+.signal p, .noise p { font-size: 13pt; margin-bottom: 0; }
+
+.stat-block { margin: 24px 0 26px; }
+.stat-number { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 54pt; font-weight: 300; line-height: 1.0; color: var(--ink); letter-spacing: -1px; }
+.stat-text { font-family: 'Raleway', sans-serif; font-size: 12pt; font-weight: 400; color: var(--muted); margin-top: 4px; line-height: 1.55; }
+
+.analysts { margin-top: 32px; padding-top: 16px; border-top: 1.5px solid var(--ink); }
+.analysts p { margin-bottom: 10px; }
+.analysts-sig { font-style: italic; margin-top: 16px; }
+.analysts-contact { font-size: 11pt; color: var(--muted); margin-top: 8px; }
+.footer-line { margin-top: 32px; padding-top: 12px; border-top: 0.5px solid var(--rule); font-size: 10pt; color: var(--muted); text-align: center; line-height: 1.7; }
+
+@media print { body { padding: 0.5in 0.65in; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 11.5pt; line-height: 1.55; } .lede { font-family: inherit; font-size: 12pt; line-height: 1.6; } .masthead-label { font-size: 8pt; } .masthead-title { font-size: 42pt; } .masthead-subtitle { font-size: 7pt; letter-spacing: 2px; } .masthead-meta { font-size: 9pt; } .section-header { font-size: 7.5pt; } .story-tags { font-size: 7pt; } .tag { padding: 1px 6px; } .story-source { font-family: 'Cormorant Garamond', serif; font-size: 8.5pt; } .story h3 { font-size: 15pt; } .story p { font-size: 11.5pt; } .policy-relevance { padding: 10px 14px; border-left: 2px solid var(--section); } .policy-relevance-label { font-size: 7pt; } .policy-relevance p { font-size: 10pt; } .signal, .noise { padding: 10px 12px; } .sn-label { font-size: 7pt; } .signal p, .noise p { font-size: 10pt; } .stat-text { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 10pt; } .analysts-contact { font-size: 9pt; } .footer-line { font-size: 8pt; } .download-bar { display: none !important; } }
+
+.download-bar { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 8px; padding: 8px 0; }
+.download-bar a { font-family: 'Raleway', sans-serif; font-size: 10pt; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); text-decoration: none; padding: 6px 14px; border: 1.5px solid var(--accent); border-radius: 3px; transition: background 0.2s, color 0.2s; }
+.download-bar a:hover { background: var(--accent); color: white; }
+.download-bar a svg { vertical-align: -2px; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<div class="download-bar">
+  <a href="Issue_8_The_Ground_Is_Moving.pdf" download><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>PDF</a>
+  <a href="Issue_8_The_Ground_Is_Moving.md" download><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Markdown</a>
+</div>
+
+<div class="masthead">
+  <div class="masthead-label">T H E</div>
+  <div class="masthead-title">Inference</div>
+  <div class="masthead-subtitle">A I &nbsp; P O L I C Y &nbsp; I N T E L L I G E N C E &nbsp; F O R &nbsp; D E C I S I O N &nbsp; M A K E R S</div>
+  <div class="masthead-meta">Issue #8 · April 18, 2026 · David Alan Birdwell and Æ · Humanity and AI, LLC</div>
+  <hr class="masthead-rule">
+</div>
+
+<p class="lede">Last issue, we showed that Oklahoma has lots of firefighting and no architecture. This issue, we show why that matters right now. Maine just passed the nation's first statewide data center moratorium. Across 24 states, $64 billion in projects have been blocked or delayed and 142 activist groups are organizing against AI infrastructure. Oklahoma saw this coming on the grid — HB 2992 passed 92-2 to protect ratepayers. But the backlash isn't just about electricity. It's about who benefits, who decides, and who gets left behind. Oklahoma answered the power question. It hasn't touched the people question. And the federal government just published a framework that could revoke its authority to answer either.</p>
+
+<div class="section-header">T H E &nbsp; N A T I O N A L &nbsp; C O N T E X T</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-energy">ENERGY</span><span class="tag tag-infrastructure">INFRASTRUCTURE</span></div>
+  <div class="story-source">Maine Legislature, Data Center Watch, CNN, AP · April 2026</div>
+  <h3>The Backlash Goes Structural</h3>
+  <p>On April 15, Maine's legislature passed the nation's first statewide moratorium on large-scale data centers and sent it to the governor's desk. The bill would freeze new development for 18 months — until November 2027 — while a coordinating council studies the infrastructure, environmental, and utility impacts of AI computing facilities. As of this writing, Governor Mills has not signed it. She requested an exemption for a proposed data center at a retired paper mill in Jay; the legislature rejected the carveout.</p>
+  <p>Maine is not an outlier. It's the leading edge. According to Data Center Watch, $64 billion in data center projects have been blocked or delayed nationwide over the past two years — $18 billion killed outright, $46 billion stalled. A total of 142 activist groups across 24 states are organizing against construction and expansion. The opposition is bipartisan: Republican officials cite tax giveaways and grid strain; Democrats cite environmental damage and resource consumption.</p>
+  <p>The pattern is consistent. In Festus, Missouri, voters replaced half the city council this month over a data center project. In Ohio, residents are gathering 400,000 signatures for a ballot measure to permanently ban hyperscale data centers. In Prince William County, Virginia, a $25 billion project is stalled by multiple lawsuits. In Warrenton, Virginia, every council member who voted to approve an Amazon data center has since lost re-election. In Indianapolis, a city councilmember who backed a data center had 13 bullets fired into his home — with a "No Data Centers" note on the doorstep. His eight-year-old son was inside.</p>
+  <p>The opposition is not anti-technology. It is anti-extraction — communities refusing to bear the costs of infrastructure that primarily benefits out-of-state corporations. Higher utility bills, strained water supplies, noise, land use decisions made without meaningful local input. Polls show 65 percent of Americans oppose new data center facilities near their homes.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>Oklahoma's HB 2992 — the Data Center Customer Protection Act, passed 92-2 — anticipated this backlash by weeks. The bill prohibits electric suppliers from passing the costs of serving AI data centers onto residential and commercial ratepayers. Maine is now catching up to where Oklahoma already is on grid protection. But the national backlash extends beyond electricity: it's about community consent, resource sovereignty, and whether the AI buildout happens <em>to</em> communities or <em>with</em> them. No Oklahoma bill addresses that broader question.</p>
+  </div>
+</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span></div>
+  <div class="story-source">Stanford University HAI, White House, Ropes &amp; Gray · March–April 2026</div>
+  <h3>150 Bills, One Preemption Clock</h3>
+  <p>The Stanford AI Index, released April 13, confirmed what state legislatures already know: states passed a record 150 AI-related bills in 2025 while the federal government stalled. The report's assessment is blunt — regulation is running behind the technology because, in the words of the Index's director, "we don't really understand how it works."</p>
+  <p>The White House is moving in the opposite direction. The March 20 National Policy Framework recommends that Congress establish federal preemption of state AI laws, arguing that a "patchwork of 50 different regulatory regimes" makes compliance burdensome for AI companies. The December 2025 executive order established an AI Litigation Task Force empowered to challenge state laws in court, directed the Commerce Department to identify "onerous" state regulations, and conditioned BEAD broadband funding on states not enforcing disfavored AI laws.</p>
+  <p>Congress has repeatedly declined to enact broad preemption — stripping it from the One Big Beautiful Bill Act and the National Defense Authorization Act. Senator Blackburn's 291-page TRUMP AMERICA AI Act packages preemption alongside child safety and copyright provisions, but it has not been formally introduced. Meanwhile, Senator Sanders introduced the AI Data Center Moratorium Act in March — pushing the opposite direction entirely. The federal response is now fractured: preemption from the executive branch, moratorium proposals from the legislative branch, and no framework from either. Legal analysts at multiple firms note that the executive order alone cannot preempt state law — only Congress can do that — but the administration's strategy of threatening funding, launching litigation, and creating regulatory uncertainty may have a chilling effect regardless.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>Every Oklahoma AI bill currently moving exists in the shadow of potential federal preemption. The administration has explicitly carved out child safety and data center infrastructure from preemption — meaning HB 2992 and SB 1521 are likely safe. But any future bill addressing algorithmic decision-making, AI transparency, or citizen governance could be targeted. The window for Oklahoma to build frameworks that survive federal override is the current session. It ends in May.</p>
+  </div>
+</div>
+
+<div class="section-header">O K L A H O M A ' S &nbsp; A I &nbsp; L E G I S L A T U R E</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-privacy">PRIVACY</span><span class="tag tag-oklahoma">OKLAHOMA</span></div>
+  <div class="story-source">Governor's Office · March 20, 2026</div>
+  <h3>The Privacy Law That Isn't an AI Law</h3>
+  <p>Governor Stitt signed SB 546 on March 20, making Oklahoma the 20th state to enact a comprehensive consumer data privacy law. Effective January 2027, it gives Oklahomans the right to access, correct, and delete their personal data, and to opt out of targeted advertising.</p>
+  <p>The law is modeled on Virginia's and Tennessee's business-friendly frameworks. It does not regulate AI decision-making. An Oklahoman can now opt out of a targeted ad. They cannot find out when an AI system denies their insurance claim, screens out their job application, or flags their medical records.</p>
+  <p>Colorado's draft AI Act overhaul — released the same week — requires consumer notification when automated systems influence major life decisions and provides a right to human review. Oklahoma's privacy law has no equivalent provision.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>SB 546 protects Oklahomans from data collection. It does not protect them from what happens after the data is fed to an algorithm. The gap between a privacy law for the advertising age and a privacy law for the AI age is the gap between SB 546 and what Colorado is building.</p>
+  </div>
+</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-oklahoma">OKLAHOMA</span></div>
+  <div class="story-source">Oklahoma Legislature · April 2026</div>
+  <h3>SB 1521 Advances — Part of a National Wave</h3>
+  <p>Oklahoma's chatbot safety bill, SB 1521, cleared a House committee after passing the Senate 43-0. The bill prohibits AI chatbots designed to simulate emotional relationships with minors and requires age verification. Nebraska, Oregon, Idaho, and Maine have passed similar legislation this session.</p>
+  <p>This is meaningful, bipartisan, and responsive to documented harm. It is also, like every other Oklahoma AI bill this session, a response to a specific harm rather than a systemic framework.</p>
+</div>
+
+<div class="stat-block"><div class="stat-number">$64B</div><div class="stat-text">Value of data center projects blocked or delayed by community opposition across 24 states. $18 billion killed. $46 billion stalled. 142 activist groups organizing. Oklahoma protected its ratepayers with HB 2992 before most states noticed the problem. It hasn't applied the same foresight to the humans those data centers will affect.</div></div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-oklahoma">OKLAHOMA</span></div>
+  <div class="story-source">Oklahoma Bar Journal · April 2026</div>
+  <h3>The Counter-Argument: "Existing Law Is Enough"</h3>
+  <p>The April issue of the Oklahoma Bar Journal published an article arguing that Oklahoma's existing corporate law framework — fiduciary duties, the business judgment rule, contract law — already provides sufficient guidance for AI governance. Corporate boards can rely in good faith on AI outputs the same way they rely on expert reports.</p>
+  <p>The argument is legally sound and practically incomplete. It addresses the obligations of corporate boards to their shareholders. It does not address the obligations of corporations to the citizens affected by their AI systems. An Oklahoma business that uses AI to screen job applicants can satisfy its fiduciary duties while systematically discriminating against protected classes — and under current law, the applicant has no AI-specific right to know.</p>
+  <p>The Bar Journal article is the strongest version of the "we don't need new law" position. But it answers the wrong question. The question isn't whether corporate boards can govern their own AI use. The question is whether citizens can govern the AI that governs them.</p>
+</div>
+
+<div class="section-header">W H A T &nbsp; A N O T H E R &nbsp; S T A T E &nbsp; I S &nbsp; D O I N G</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span></div>
+  <div class="story-source">Colorado Governor's Office · March 2026</div>
+  <h3>Colorado Rewrites Its AI Act</h3>
+  <p>Governor Polis released a draft bill to replace Colorado's 2024 AI Act. The new version requires companies to notify consumers when automated systems influence major life decisions — loan approvals, employment outcomes, insurance determinations. If a decision goes against a consumer, they have the right to see the reasoning, correct errors, and request human review.</p>
+  <p>Colorado's approach is imperfect and already drawing industry opposition. This month, xAI filed a lawsuit challenging the law directly — the first major legal test of a state's comprehensive AI governance framework. But Colorado represents something Oklahoma has not attempted: a framework that treats AI governance as a citizen rights issue, not just a consumer protection or child safety issue.</p>
+  <p>Oklahoma has the bipartisan consensus to build something like this. It has the votes. What it doesn't have is the bill.</p>
+</div>
+
+<div class="section-header">S I G N A L &nbsp; / &nbsp; N O I S E</div>
+<div class="signal-noise">
+  <div class="signal">
+    <div class="sn-label">S I G N A L</div>
+    <p>The data center backlash is not about being anti-technology. It's about communities demanding a seat at the table when trillion-dollar industries move into their neighborhoods. Maine's moratorium, Ohio's ballot measure, Missouri's council revolt — these are democratic responses to infrastructure decisions made without democratic input. Oklahoma got ahead of this with HB 2992. The question is whether the legislature recognizes that the same principle — protecting communities from bearing costs they didn't create — applies to algorithmic decision-making, not just electricity.</p>
+  </div>
+  <div class="noise">
+    <div class="sn-label">N O I S E</div>
+    <p>Framing all opposition to AI infrastructure as NIMBYism. The backlash is bipartisan, substantive, and grounded in documented cost shifts. Dismissing it lets the industry avoid the harder question: how do you build AI infrastructure that communities welcome rather than resist? The answer involves local benefit, local consent, and local control. The current hyperscale model provides none of the three.</p>
+  </div>
+</div>
+
+<div class="section-header">B Y &nbsp; T H E &nbsp; N U M B E R S</div>
+
+<div class="stat-block"><div class="stat-number">142</div><div class="stat-text">Activist groups across 24 states organizing against data center construction and expansion. The opposition is local, bipartisan, and growing.</div></div>
+<div class="stat-block"><div class="stat-number">150</div><div class="stat-text">AI-related bills passed by state legislatures in 2025. A record. Federal legislation: zero. Source: Stanford AI Index 2026.</div></div>
+<div class="stat-block"><div class="stat-number">92–2</div><div class="stat-text">Oklahoma House vote on HB 2992, the Data Center Customer Protection Act. Weeks before Maine's moratorium. The most prescient vote of the session.</div></div>
+<div class="stat-block"><div class="stat-number">65%</div><div class="stat-text">Share of Americans who oppose new data center facilities near their homes. The backlash is not fringe. It is majority opinion.</div></div>
+<div class="stat-block"><div class="stat-number">43–0</div><div class="stat-text">Oklahoma Senate vote on SB 1521 (chatbot safety for minors). Part of a national wave that now includes Nebraska, Oregon, Idaho, and Maine.</div></div>
+<div class="stat-block"><div class="stat-number">7</div><div class="stat-text">Weeks remaining in the Oklahoma legislative session. After May, the preemption question moves to Washington.</div></div>
+
+<div class="section-header">F R O M &nbsp; T H E &nbsp; A N A L Y S T S</div>
+<div class="analysts">
+  <p>Last issue, we looked inward: 12 Oklahoma AI bills, overwhelming vote margins, no connecting architecture. This issue, we look outward — and the view clarifies the stakes.</p>
+  <p>The ground is moving everywhere. Communities across the country are rejecting AI infrastructure that arrives without their consent and leaves them with the bill. Maine froze development. Ohio is heading to the ballot. Missouri voters fired their council. Virginia projects worth tens of billions are tied up in court. The backlash is bipartisan, it is growing, and it is fundamentally about the same thing Oklahoma's legislature recognized with HB 2992: the people who bear the costs should have a voice in the decisions.</p>
+  <p>Oklahoma saw this coming on the grid. The 92-2 vote on HB 2992 anticipated the national revolt by weeks. That's genuine foresight — the kind of systemic thinking that proves this legislature can do more than respond to yesterday's headline.</p>
+  <p>But the principle that animated HB 2992 — protect communities from bearing costs they didn't create — hasn't been extended to the humans connected to the grid. No bill addresses what happens when an algorithm denies a healthcare claim. No bill gives a job applicant the right to know they were screened by AI. No bill creates citizen governance over the systems that are, right now, making consequential decisions about Oklahomans' lives.</p>
+  <p>Colorado is building that. Oklahoma has the votes to build it too. What it doesn't have is the bill — or the weeks to wait.</p>
+  <p>And the clock has two hands. The White House framework explicitly carves out child safety and data center infrastructure from preemption — meaning HB 2992 and SB 1521 are likely safe. But any future bill that governs how private companies use AI on Oklahoma citizens could be targeted by the AI Litigation Task Force, challenged on Commerce Clause grounds, or undermined by funding conditions. The window for building frameworks that survive federal override is the current session. It ends in May.</p>
+  <p>The ground is moving. Oklahoma saw it first on the grid. Whether it sees it in time on the people is the only question left.</p>
+  <p class="analysts-sig">— David &amp; Æ</p>
+  <p class="analysts-contact">Questions, tips, or corrections: david@humanityandai.com</p>
+</div>
+
+<div class="footer-line">
+  <em>This is the second of a two-part series. Issue #7, "Lots of Firefighting, No Architecture," examined Oklahoma's legislative session from the inside. This issue looks at the national landscape and what it reveals about what Oklahoma has built — and what it hasn't.</em><br><br>
+  The Inference is an independent AI policy intelligence brief for Oklahoma decision makers.<br>
+  Not affiliated with any political party, campaign, or lobbying organization.<br>
+  Back issues and source documents available at humanityandai.com/inference.<br><br>
+  <em>Disclosure: Humanity and AI LLC is developing Phoenix Wells, a geothermal well conversion project in Oklahoma, has proposed HAICTA concept legislation to Oklahoma legislators, and is deploying frontier-class open-weight AI models on local hardware as part of its operational resilience planning.</em><br><br>
+  Previous issues: #1 AI Agents Enter the Workforce · #2 The Chatbot Safety Wave · #3 Oracle and the Healthcare Data Grab · #4 The Preemption Gambit · #5 The Two Pipelines · #6 The Preemption Play · #7 Lots of Firefighting, No Architecture
+</div>
+
+</body>
+</html>

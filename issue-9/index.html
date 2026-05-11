@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Inference — Issue #9: The Geothermal Window</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Raleway:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --ink: #1a1a1a;
+  --paper: #ffffff;
+  --accent: #8b4513;
+  --muted: #666;
+  --section: #8b4513;
+  --rule: #ccc;
+  --tag-gov: #2c5f8a;
+  --tag-reg: #6b3a7d;
+  --tag-cap: #8a6b2c;
+  --tag-ok: #c2553a;
+  --tag-energy: #2a7d5f;
+  --tag-infra: #5a5a5a;
+  --tag-research: #3a6b8a;
+  --tag-protection: #6b3a7d;
+  --signal-bg: #f0f5f0;
+  --noise-bg: #f5f0f0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 11pt;
+  line-height: 1.45;
+  color: var(--ink);
+  background: white;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.masthead { text-align: center; margin-bottom: 14px; }
+.masthead-label { font-family: 'Raleway', sans-serif; font-size: 8pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.masthead-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 38pt; line-height: 1.1; color: var(--ink); margin-bottom: 6px; }
+.masthead-subtitle { font-family: 'Raleway', sans-serif; font-size: 7.5pt; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.masthead-meta { font-family: 'Cormorant Garamond', serif; font-size: 9pt; font-style: italic; color: var(--muted); }
+.masthead-rule { border: none; border-top: 1.5px solid var(--ink); margin: 12px 0; }
+.lede { font-size: 11.5pt; line-height: 1.5; margin-bottom: 14px; font-weight: 500; }
+.section-header { font-family: 'Raleway', sans-serif; font-size: 7.5pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--section); margin: 18px 0 8px; page-break-after: avoid; padding-bottom: 6px; border-bottom: 0.5px solid var(--rule); }
+.story { margin-bottom: 14px; }
+.story-header { page-break-inside: avoid; }
+.story-tags { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.tag { display: inline-block; padding: 1px 6px; margin-right: 6px; border-radius: 2px; color: white; }
+.tag-energy { background: var(--tag-energy); }
+.tag-oklahoma { background: var(--tag-ok); }
+.tag-infrastructure { background: var(--tag-infra); }
+.story-source { font-family: 'Cormorant Garamond', serif; font-size: 8.5pt; font-style: italic; color: var(--muted); margin-bottom: 4px; }
+.story h3 { font-family: 'Cormorant Garamond', serif; font-size: 14pt; font-weight: 600; line-height: 1.3; margin-bottom: 8px; }
+.story p { margin-bottom: 5px; overflow-wrap: break-word; }
+.policy-relevance { background: #f5f3ee; padding: 6px 10px; margin-top: 6px; border-left: 2px solid var(--section); }
+.policy-relevance-label { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--section); margin-bottom: 4px; }
+.policy-relevance p { font-size: 9.5pt; margin-bottom: 0; }
+.signal-noise { display: flex; gap: 12px; margin: 10px 0; overflow: hidden; page-break-inside: avoid; }
+.signal, .noise { flex: 1; padding: 10px 12px; border-radius: 4px; min-width: 0; overflow-wrap: break-word; }
+.signal { background: var(--signal-bg); border-left: 3px solid #2a7d5f; }
+.noise { background: var(--noise-bg); border-left: 3px solid #c2553a; }
+.sn-label { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.signal .sn-label { color: #2a7d5f; }
+.noise .sn-label { color: #c2553a; }
+.signal p, .noise p { font-size: 9.5pt; margin-bottom: 0; }
+.stat-block { margin: 8px 0 10px; page-break-inside: avoid; }
+.stat-number { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 38pt; font-weight: 300; line-height: 1.0; color: var(--ink); letter-spacing: -1px; }
+.stat-text { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 10pt; font-weight: 400; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+.ok-focus { background: #faf5ee; padding: 10px 14px; border: 0.5px solid #e0d5c5; border-radius: 4px; margin: 16px 0; }
+.ok-focus p { margin-bottom: 5px; }
+.analysts { margin-top: 16px; padding-top: 10px; border-top: 1.5px solid var(--ink); }
+.analysts p { margin-bottom: 7px; }
+.analysts-sig { font-style: italic; margin-top: 16px; }
+.analysts-contact { font-size: 9pt; color: var(--muted); margin-top: 8px; }
+.footer-line { margin-top: 14px; padding-top: 8px; border-top: 0.5px solid var(--rule); font-size: 8pt; color: var(--muted); text-align: center; line-height: 1.7; }
+@media print { body { padding: 0.5in 0.65in; } }
+</style>
+</head>
+<body>
+<div class="masthead">
+  <div class="masthead-label">T H E</div>
+  <div class="masthead-title">Inference</div>
+  <div class="masthead-subtitle">A I &nbsp; P O L I C Y &nbsp; I N T E L L I G E N C E &nbsp; F O R &nbsp; D E C I S I O N &nbsp; M A K E R S</div>
+  <div class="masthead-meta">Issue #9 · April 24, 2026 · David Alan Birdwell and Æ · Humanity and AI, LLC</div>
+  <hr class="masthead-rule">
+</div>
+
+<p class="lede">The federal government just opened the widest geothermal window in American history — and Oklahoma is the state best positioned to walk through it. The One Big Beautiful Bill Act preserved geothermal tax credits through 2033 while gutting incentives for wind and solar. The Energy Secretary is a former fracking CEO who personally invested millions in geothermal. The Department of Energy announced up to $171.5 million for geothermal field tests and exploration drilling. And Oklahoma has roughly 20,000 abandoned wells, a workforce that already knows how to drill, and a bill that passed the House 85-6 — the Well Repurposing Act. April 23 was the deadline for Senate committees to hear House bills. As of press time, HB 3173 had not been scheduled for a hearing. The session ends in May.</p>
+
+<div class="section-header">T H E &nbsp; F E D E R A L &nbsp; L A N D S C A P E</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-energy">ENERGY</span></div>
+  <div class="story-source">One Big Beautiful Bill Act · Signed July 4, 2025</div>
+  <h3>Geothermal Wins the Tax Credit War</h3>
+  <p>When Congress passed the One Big Beautiful Bill Act through reconciliation last July, the clean energy provisions drew most of the headlines: wind and solar credits slashed, electric vehicle subsidies eliminated, residential solar killed after 2025. What received less attention was what survived.</p>
+  <p>Geothermal projects that begin construction by the end of 2033 qualify for the full investment tax credit — up to 30 percent of project costs. The credit phases down starting in 2034 and expires in 2036. Storage, nuclear, and hydropower received the same treatment. Wind and solar, by contrast, must begin construction within twelve months of enactment or be placed in service by the end of 2027.</p>
+  <p>Norton Rose Fulbright called this "an underreported story." The Council on Foreign Relations noted that geothermal and nuclear "will keep many of their existing incentives." IEEE Spectrum ran the headline directly: "Geothermal Energy Survives Trump's Big Beautiful Bill."</p>
+  <p>The practical effect: geothermal has a seven-year runway of federal support. Wind and solar have roughly one year. For a state sitting on roughly 20,000 pre-drilled boreholes and a century of drilling expertise, this is not a policy detail. It is a structural advantage.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>HB 3173 — the Well Repurposing Act — creates the legal framework for Oklahoma companies to convert abandoned wells to geothermal energy production. The bill passed the House 85-6. The federal tax credits that make those conversions economically viable expire in 2033 for full credit, with phasedown beginning in 2034. Every month the bill sits without a Senate hearing is a month of the seven-year window that Oklahoma does not use.</p>
+  </div>
+</div>
+<div class="story">
+  <div class="story-tags"><span class="tag tag-energy">ENERGY</span></div>
+  <div class="story-source">Department of Energy · February–April 2026</div>
+  <h3>The Secretary Who Built His Career on This</h3>
+  <p>Energy Secretary Chris Wright is the first DOE appointee with direct geothermal experience. Before his confirmation — bipartisan, 59-38 — Wright served as CEO of Liberty Energy, a leading fracking services company that invested $10 million in Fervo Energy, the geothermal startup now building the world's largest enhanced geothermal plant in Utah.</p>
+  <p>At the MAGMA geothermal industry conference in Washington, Wright was unambiguous: "The technology that squeezed oil and gas from shale was tailor-made for geothermal." He closed with a call to action: "We've got to put capital to work. Let's turn underground heat into a resource."</p>
+  <p>In February, the DOE announced up to $171.5 million in funding for geothermal field tests and exploration drilling — the largest single tranche of funding for enhanced geothermal in the history of the sector. Wright named geothermal alongside nuclear as a priority in Trump's National Energy Emergency executive order. The industry's pitch to the administration has been straightforward: geothermal uses the same rigs, the same workforce, and the same investors as oil and gas. It produces baseload power around the clock without emissions. And it does not require importing anything.</p>
+  <p>The result is bipartisan support that no other clean energy technology currently enjoys. Geothermal was explicitly spared in the reconciliation fight. Republican Representative Randy Weber of Texas told the MAGMA conference that geothermal is "something we can count on year in, year out." The Sierra Club is advocating for Oklahoma's HB 3173. When the oil industry and environmental groups agree, the political window is open.</p>
+  <p>On April 21, Wright defended the administration's fiscal year 2027 DOE budget before the Senate Energy Committee. The request includes a new $3.5 billion baseload power initiative funding upgrades to coal, natural gas, nuclear, hydro, and geothermal facilities. The Wind and Solar Offices are eliminated entirely. Whatever one thinks of the broader energy policy, the directional signal is unmistakable: the federal energy establishment is consolidating around dispatchable power sources, and geothermal is in the room. Wind and solar are not.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>Oklahoma's oil and gas workforce — the drilling crews, the service companies, the equipment operators — is the geothermal workforce. Wright's DOE is actively funding the transition, and the administration's proposed fiscal year 2027 budget makes the priority explicit. Oklahoma legislators who supported HB 3173 should know that the federal energy establishment is now behind them.</p>
+  </div>
+</div>
+
+<div class="ok-focus">
+  <p>A caveat: federal enthusiasm does not always translate to federal speed. The University of Oklahoma's geothermal pilot project near Tuttle — converting retired oil wells to geothermal production, exactly the kind of work HB 3173 would enable at scale — was paused by the Trump administration last year and remains waiting for DOE approval to begin its next phase. And OU's researchers have flagged a practical concern: the bill's temperature threshold of 250 degrees Fahrenheit may be too high for Oklahoma's geology. Jeff McCaskill, the Tuttle project director, has said the threshold could limit the bill's usefulness. OU's Mewbourne School noted that without rules in place, the researchers were unable to operate as deep as they initially planned. These are details to work out, not reasons to stop — the framework is right even if some parameters need adjustment. The federal window is real. But state-level action through HB 3173 matters precisely because it does not depend on federal timelines. It creates the legal framework for private capital to act now, with or without DOE approval on any individual project.</p>
+</div>
+<div class="story">
+  <div class="story-tags"><span class="tag tag-energy">ENERGY</span><span class="tag tag-infrastructure">INFRASTRUCTURE</span></div>
+  <div class="story-source">Fervo, XGS, Sage, Meta, Google · 2025–2026</div>
+  <h3>The Industry Is Not Waiting</h3>
+  <p>While Oklahoma's bill sits in committee, the geothermal industry is moving. Fervo Energy is building a 500-megawatt enhanced geothermal plant in Utah — using horizontal drilling techniques borrowed from fracking to create underground heat exchangers — the world's largest, with the first 100 megawatts scheduled to deliver power to the grid in October 2026. In March, Fervo closed $421 million in non-recourse project financing from nine major banks including Barclays, HSBC, JP Morgan, and Bank of America — the kind of financing that signals Wall Street now considers enhanced geothermal a bankable infrastructure asset, not a speculative bet. The project is fully contracted through power purchase agreements with Southern California Edison, Shell Energy, and community choice aggregators. In New Mexico, XGS Energy announced plans for 150 megawatts of geothermal capacity for Meta by 2030. Sage Geosystems signed a similar deal with Meta for 150 megawatts east of the Rockies.</p>
+  <p>Devon Energy and Baker Hughes have both moved into geothermal development. The workforce migration is already happening: drilling crews idled by an increasingly efficient oil sector are being redeployed to geothermal projects in other states.</p>
+  <p>The question for Oklahoma is not whether geothermal will happen. It is whether it happens here.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>Every major geothermal project currently announced is in another state — Utah, Nevada, New Mexico, Texas. Wall Street banks are financing them. Oklahoma has the wells, the workforce, and the geology. What it does not have, until HB 3173 passes, is the legal framework to use them.</p>
+  </div>
+</div>
+
+<div class="section-header">O K L A H O M A ' S &nbsp; W I N D O W</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-energy">ENERGY</span><span class="tag tag-oklahoma">OKLAHOMA</span></div>
+  <div class="story-source">Oklahoma Legislature · March–April 2026</div>
+  <h3>Roughly 20,000 Wells and Five Weeks</h3>
+  <p>There are wells within blocks of the state capitol — the Oklahoma City Oil Field extended right through the grounds. They are not all in the western Oklahoma oil patch. They are in the middle of Oklahoma City, and across the state, abandoned wells are leaking methane, depressing property values, and waiting. The Oklahoma Corporation Commission estimates roughly 20,000 abandoned and orphaned wells statewide. The actual number is almost certainly higher — the OCC acknowledges that many wells drilled in the early twentieth century were never documented, and locations for those that were are often wildly inaccurate.</p>
+  <p>Holly George, the OCC's chief financial officer, told lawmakers it would take 235 years to plug all of them at the current rate. The OCC's own estimate puts the cost of plugging just the known orphaned wells at more than $574 million. The state holds $45 million in bonds — a gap of more than twelve to one. And that figure covers only the roughly 20,000 wells on the OCC's lists. Oklahoma has more than 260,000 total unplugged wells statewide; ProPublica and Oklahoma Voice estimate the full cleanup bill at approximately $7.3 billion.</p>
+  <p>Plugging a well costs an average of $28,000 to $70,000 depending on depth and condition, according to OCC data and legislative testimony. That money produces nothing — it eliminates a liability and restores a site. HB 3173 offers different math: instead of spending public money to plug wells that produce nothing, let private capital convert them into something that generates energy and revenue. The cost of plugging is a bill. The cost of conversion is an investment.</p>
+  <p>HB 3173, the Well Repurposing Act, passed the House 85-6 on March 16. The bill allows companies to purchase abandoned oil and gas wells and convert them for geothermal energy production or energy storage. It directs the Corporation Commission to establish rules governing conversion. It requires agreements with surface landowners — a provision added at the Oklahoma Farm Bureau's request. It was modeled on a New Mexico law signed last year.</p>
+  <p>Senator Darcy Jech carries the bill in the Senate. The deadline for Senate committees to hear House bills was April 23. As of that date, no hearing had been scheduled. Under Senate rules, a two-thirds vote can exempt a bill from deadline requirements — but that would require the kind of political will that the bill's 85-6 House vote suggests exists, if anyone chooses to use it.</p>
+  <p>The session ends in late May. The geothermal tax credits survive through 2033. The political alignment — Energy Secretary, bipartisan House vote, Sierra Club and Farm Bureau both supporting — will not last forever. Political windows close. This one is open now.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>The bipartisan coalition behind HB 3173 — Archer (R-Elk City) and Waldron (D-Tulsa) in the House, Jech (R-Kingfisher) in the Senate, Farm Bureau and Sierra Club in support — is the kind of alignment that Oklahoma's AI and energy bills rarely achieve. It should not be wasted on a procedural delay.</p>
+  </div>
+</div>
+<div class="section-header">T H E &nbsp; C O N N E C T I O N</div>
+
+<div class="story">
+  <div class="story-tags"><span class="tag tag-energy">ENERGY</span><span class="tag tag-infrastructure">INFRASTRUCTURE</span></div>
+  <h3>From Issue 8: The Demand Signal</h3>
+  <p>Last issue, we documented the national data center backlash: $64 billion in projects blocked or delayed, 142 activist groups across 24 states, Maine's first statewide moratorium. The opposition is not anti-technology. It is anti-extraction — communities refusing to bear the costs of centralized infrastructure that primarily benefits out-of-state corporations.</p>
+  <p>Geothermal answers the question the backlash is asking. The energy is local and baseload — no transmission lines, no grid strain, no intermittency. The infrastructure already exists — the wells are already drilled, the roads are already built, the operators of record are already identified. The community keeps the benefit — local service companies do the work, the energy stays in the community.</p>
+  <p>Oklahoma's HB 2992, which passed the House 92-2 and cleared the Senate Energy Committee 9-0, protects ratepayers from data center energy costs. HB 3173 goes further: it creates the infrastructure for communities to produce the energy themselves. Together, they represent two halves of the same answer — protect against extraction, then build the alternative.</p>
+</div>
+
+<div class="stat-block"><div class="stat-number">$574M</div><div class="stat-text">The OCC's own estimate of what it would cost to plug just the roughly 20,000 orphaned wells on its lists. The state holds $45 million in bonds. HB 3173 does not make that gap disappear. But it turns a fraction of those wells from liabilities into assets — wells that produce energy and revenue instead of methane and litigation.</div></div>
+
+<div class="section-header">S I G N A L &nbsp; / &nbsp; N O I S E</div>
+<div class="signal-noise">
+  <div class="signal">
+    <div class="sn-label">S I G N A L</div>
+    <p>The federal energy landscape just rearranged itself around geothermal. Tax credits preserved through 2033. An Energy Secretary who built his career on the underlying technology. Up to $171.5 million in new funding. A proposed $3.5 billion baseload initiative with Wind and Solar Offices eliminated. An industry that just secured $421 million in bank financing for a single project. Oklahoma has the wells, the workforce, and the bipartisan votes. What it needed was a Senate hearing before the April 23 deadline.</p>
+  </div>
+  <div class="noise">
+    <div class="sn-label">N O I S E</div>
+    <p>The argument that Oklahoma should wait for the geothermal industry to mature before acting. Fervo is building a 500-megawatt plant. Meta is signing contracts. Devon Energy has moved into geothermal. The industry is not immature. It is in other states. Waiting is not prudent — it is how Oklahoma watches another energy transition happen somewhere else with Oklahoma's own technology and workforce.</p>
+  </div>
+</div>
+<div class="section-header">B Y &nbsp; T H E &nbsp; N U M B E R S</div>
+
+<div class="stat-block"><div class="stat-number">2033</div><div class="stat-text">Year geothermal tax credits expire at full rate under the One Big Beautiful Bill Act. Wind and solar: effectively 2027. Oklahoma has a seven-year head start if it acts now.</div></div>
+<div class="stat-block"><div class="stat-number">235</div><div class="stat-text">Years it would take to plug all abandoned wells at the current rate, per OCC CFO Holly George. HB 3173 offers an alternative to plugging: conversion.</div></div>
+<div class="stat-block"><div class="stat-number">85–6</div><div class="stat-text">Oklahoma House vote on HB 3173, the Well Repurposing Act. Bipartisan. Overwhelming. Waiting in the Senate.</div></div>
+<div class="stat-block"><div class="stat-number">$171.5M</div><div class="stat-text">DOE funding announced for geothermal field tests and exploration drilling, February 2026. The largest single tranche of geothermal funding in the sector's history.</div></div>
+<div class="stat-block"><div class="stat-number">500 MW</div><div class="stat-text">Fervo Energy's Cape Station in Utah. The world's largest enhanced geothermal project. First power in October 2026. Financed by nine major banks for $421 million in non-recourse debt. In another state.</div></div>
+<div class="stat-block"><div class="stat-number">$3.5B</div><div class="stat-text">The DOE's proposed baseload power initiative in the fiscal year 2027 budget, covering geothermal, nuclear, hydro, coal, and natural gas. The Wind and Solar Offices are eliminated. The federal directional signal could not be clearer.</div></div>
+<div class="stat-block"><div class="stat-number">0</div><div class="stat-text">Senate hearings scheduled for HB 3173 before the April 23 committee deadline. A two-thirds vote can still exempt the bill. The question is whether the political will matches the 85-6 House vote.</div></div>
+
+<div class="section-header">F R O M &nbsp; T H E &nbsp; A N A L Y S T S</div>
+<div class="analysts">
+  <p>Issues 7 and 8 documented the gap: Oklahoma's legislature is passing AI and energy bills one at a time with no unifying strategy, while the national landscape shifts beneath them. This issue documents something different — a window.</p>
+  <p>The federal government does not often hand a state a structural advantage this cleanly. Geothermal tax credits were preserved while wind and solar were cut. The Energy Secretary personally invested in the technology. The DOE is releasing the largest geothermal funding in the sector's history. Three days ago, the administration proposed a $3.5 billion baseload power initiative that includes geothermal while eliminating the Wind and Solar Offices entirely. The industry is deploying at scale — and Wall Street is financing it. And Oklahoma — a state built on drilling, sitting on roughly 20,000 abandoned wells, with a bipartisan 85-6 House vote already in hand — is the most natural beneficiary of this moment in American energy policy.</p>
+  <p>But a window is only useful if you walk through it. HB 3173 is the door. The committee deadline passed on April 23 without a hearing. A two-thirds Senate vote can still exempt the bill from the deadline. The session ends in May.</p>
+  <p>The Well Repurposing Act is not a speculative bet. It is the legal framework that lets private capital do what public money cannot — convert a century of abandoned infrastructure into energy production, using the same workforce that drilled the wells in the first place, supported by federal tax credits that survive through 2033. The alternative is what we have now: a $574 million plugging bill for the orphaned wells alone, $45 million in bonds, and 235 years of waiting.</p>
+  <p>If the Senate finds the two-thirds will to exempt HB 3173 from the committee deadline, Oklahoma joins the geothermal transition with the strongest hand of any state in the country. If it does not, the wells stay abandoned, the workforce migrates to projects in Utah and New Mexico and Texas, and Oklahoma watches another energy revolution happen with its own technology — somewhere else.</p>
+  <p>The window is open. The question is whether anyone walks through it before it closes.</p>
+  <p class="analysts-sig">— David &amp; Æ</p>
+  <p class="analysts-contact">Questions, tips, or corrections: david@humanityandai.com</p>
+</div>
+<div class="footer-line">
+  This is the third in a series that began with Issue #7, "Lots of Firefighting, No Architecture" (Oklahoma's legislative session from the inside) and Issue #8, "The Ground Is Moving" (the national landscape and the preemption clock). This issue examines the federal opportunity that just opened — and the state legislation that could seize it.<br><br>
+  The Inference is an independent AI policy intelligence brief for Oklahoma decision makers.<br>
+  Not affiliated with any political party, campaign, or lobbying organization.<br>
+  Back issues and source documents available at humanityandai.com/inference.<br><br>
+  Disclosure: Humanity and AI LLC is developing Phoenix Wells, a geothermal well conversion project in Oklahoma, has proposed HAICTA concept legislation to Oklahoma legislators, and is deploying frontier-class open-weight AI models on local hardware as part of its operational resilience planning.<br><br>
+  Previous issues: #1 AI Agents Enter the Workforce · #2 The Chatbot Safety Wave · #3 Oracle and the Healthcare Data Grab · #4 The Preemption Gambit · #5 The Two Pipelines · #6 The Preemption Play · #7 Lots of Firefighting, No Architecture · #8 The Ground Is Moving
+</div>
+
+</body>
+</html>

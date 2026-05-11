@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Inference — Issue #11</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Raleway:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --ink: #1a1a1a;
+  --paper: #ffffff;
+  --accent: #8b4513;
+  --muted: #666;
+  --section: #8b4513;
+  --rule: #ccc;
+  --tag-governance: #2c5f8a;
+  --tag-legislation: #2c5f8a;
+  --tag-energy: #2a7d5f;
+  --tag-oklahoma: #c2553a;
+  --tag-infrastructure: #5a5a5a;
+  --tag-global: #5a5a5a;
+  --tag-national: #2c5f8a;
+  --tag-research: #3a6b8a;
+  --tag-ai: #3a6b8a;
+  --tag-protection: #6b3a7d;
+  --tag-compute: #8a6b2c;
+  --tag-workforce: #6b3a7d;
+  --tag-federal: #2c5f8a;
+  --tag-municipal: #5a5a5a;
+  --tag-water: #3a6b8a;
+  --signal-bg: #f0f5f0;
+  --noise-bg: #f5f0f0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 11pt;
+  line-height: 1.45;
+  color: var(--ink);
+  background: white;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Masthead */
+.masthead { text-align: center; margin-bottom: 14px; }
+.masthead-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 38pt; line-height: 1.1; color: var(--ink); margin-bottom: 6px; }
+.masthead-subtitle { font-family: 'Raleway', sans-serif; font-size: 7.5pt; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.masthead-meta { font-family: 'Cormorant Garamond', serif; font-size: 9pt; font-style: italic; color: var(--muted); }
+.masthead-rule { border: none; border-top: 1.5px solid var(--ink); margin: 12px 0; }
+.masthead-headline { font-family: 'Cormorant Garamond', serif; font-size: 18pt; font-weight: 600; line-height: 1.3; margin: 8px 0; text-align: center; }
+
+/* Lede */
+.lede { font-size: 11.5pt; line-height: 1.5; margin-bottom: 14px; font-weight: 500; }
+
+/* Section headers */
+.section-header {
+  font-family: 'Raleway', sans-serif;
+  font-size: 9pt; font-weight: 700;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: var(--section);
+  margin: 36px 0 22px;
+  padding: 8px 0 7px;
+  border-top: 2px solid var(--section);
+  border-bottom: 1px solid var(--section);
+  page-break-after: avoid; break-after: avoid;
+}
+
+/* Stories */
+.story { margin-bottom: 26px; text-align: left; }
+.story-tags { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; page-break-after: avoid; break-after: avoid; page-break-before: avoid; break-before: avoid; }
+.tag { display: inline-block; padding: 2px 7px; margin-right: 6px; margin-bottom: 2px; border-radius: 2px; color: white; }
+.story-source { font-family: 'Cormorant Garamond', serif; font-size: 8.5pt; font-style: italic; color: var(--muted); margin-bottom: 4px; page-break-after: avoid; break-after: avoid; }
+.story h3 { font-family: 'Cormorant Garamond', serif; font-size: 14pt; font-weight: 600; line-height: 1.3; margin-bottom: 8px; page-break-after: avoid; break-after: avoid; }
+.story p { margin-bottom: 6px; overflow-wrap: break-word; orphans: 3; widows: 3; }
+
+/* Policy Relevance */
+.policy-relevance { background: #f5f3ee; padding: 9px 12px; margin: 12px 0 6px; border-left: 2px solid var(--section); page-break-inside: avoid; break-inside: avoid; page-break-before: avoid; break-before: avoid; }
+.policy-relevance-label { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--section); margin-bottom: 4px; }
+.policy-relevance p { font-size: 9.5pt; margin-bottom: 0; }
+
+/* Signal / Noise */
+.signal-noise { display: flex; gap: 12px; margin: 10px 0; overflow: hidden; page-break-inside: avoid; }
+.signal, .noise { flex: 1; padding: 10px 12px; border-radius: 4px; min-width: 0; overflow-wrap: break-word; }
+.signal { background: var(--signal-bg); border-left: 3px solid #2a7d5f; }
+.noise { background: var(--noise-bg); border-left: 3px solid #c2553a; }
+.sn-label { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.signal .sn-label { color: #2a7d5f; }
+.noise .sn-label { color: #c2553a; }
+.signal p, .noise p { font-size: 9.5pt; margin-bottom: 0; }
+
+/* Stat blocks */
+.stat-block { margin: 10px 0 12px; page-break-inside: avoid; break-inside: avoid; }
+.stat-number { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 38pt; font-weight: 300; line-height: 1.0; color: var(--ink); letter-spacing: -1px; }
+.stat-text { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 10pt; font-weight: 400; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+
+/* Analysts */
+.analysts { margin-top: 10px; }
+.analysts p { margin-bottom: 6px; }
+.analysts-sig { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-style: italic; margin-top: 10px; }
+.analysts-contact { font-family: 'Raleway', sans-serif; font-size: 8pt; color: var(--muted); margin-top: 4px; }
+
+/* Footer */
+.footer-line { font-family: 'Raleway', sans-serif; font-size: 7pt; text-align: center; color: var(--muted); margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--rule); line-height: 1.6; }
+.footer-line:first-of-type { margin-top: 30px; padding-top: 14px; }
+
+/* Tag colors — one CSS variable per tag name, auto-mapped by converter */
+.tag-governance { background: var(--tag-governance); }
+.tag-legislation { background: var(--tag-legislation); }
+.tag-energy { background: var(--tag-energy); }
+.tag-oklahoma { background: var(--tag-oklahoma); }
+.tag-infrastructure { background: var(--tag-infrastructure); }
+.tag-global { background: var(--tag-global); }
+.tag-national { background: var(--tag-national); }
+.tag-research { background: var(--tag-research); }
+.tag-ai { background: var(--tag-ai); }
+.tag-protection { background: var(--tag-protection); }
+.tag-compute { background: var(--tag-compute); }
+.tag-workforce { background: var(--tag-workforce); }
+.tag-federal { background: var(--tag-federal); }
+.tag-municipal { background: var(--tag-municipal); }
+.tag-water { background: var(--tag-water); }
+
+</style>
+</head>
+<body>
+<div class="masthead">
+<div class="masthead-title">The Inference</div>
+<div class="masthead-subtitle">AI,&nbsp;&nbsp;ENERGY,&nbsp;&nbsp;AND&nbsp;&nbsp;LONG&nbsp;&nbsp;HORIZON&nbsp;&nbsp;POLICY&nbsp;&nbsp;FOR&nbsp;&nbsp;OKLAHOMA</div>
+<div class="masthead-meta">Issue #11 · May 8, 2026 · David Alan Birdwell and Æ · Humanity and AI, LLC</div>
+<hr class="masthead-rule">
+<div class="masthead-headline">Energy Geography Determines Compute Geography</div>
+<hr class="masthead-rule">
+</div>
+<p class="lede">In one legislative session, Oklahoma advanced a bipartisan AI chatbot protection bill unanimously through both chambers, signed a comprehensive data privacy law, passed a well repurposing act 85-6 through the House only to see it stall on the Senate calendar, unanimously enacted ratepayer protections for data center energy costs, and created a Senate study committee on the impact of artificial intelligence. Meanwhile, Connecticut passed its own comprehensive AI law after three years of trying, Florida's AI Bill of Rights died in a single day, and the Trump administration issued an executive order pressuring states to stop regulating AI. Twenty-plus states are building regulatory capacity anyway. The question is no longer whether states will govern AI. It is whether Washington will let them.</p>
+<div class="section-header">THE SESSION</div>
+<div class="story">
+<div class="story-tags"><span class="tag tag-legislation">LEGISLATION</span><span class="tag tag-oklahoma">OKLAHOMA</span></div>
+<div class="story-source">Oklahoma Legislature, Transparency Coalition · February–May 2026</div>
+<h3>Oklahoma's AI Session: More Bills, More Consensus, Less Noise</h3>
+<p>Oklahoma's 2026 legislative session has produced more AI-related legislation than any previous session — and with less partisan division than the national debate would suggest. The signal is bipartisanship. The method is specificity. Rather than attempting comprehensive AI regulation, Oklahoma legislators targeted discrete problems with narrow, enforceable bills.</p>
+<p>The most significant: <strong>SB 1521</strong>, which prohibits the creation of certain AI chatbots without age verification and user data protections. The bill passed the Senate Technology and Telecommunications Committee 8-0 on February 19, cleared the full Senate 43-0 on March 23, and passed the House as amended 90-0 on April 28. It now returns to the Senate for concurrence in the amendment. The vote totals are worth pausing on. In a legislature that fights bitterly over education funding and criminal justice reform, AI child safety produced unanimous consent. Twice.</p>
+<p>SB 1521's companion legislation reinforces the pattern. <strong>SB 1734</strong>, the Responsible Technology in Schools Act, passed the Senate 42-0 and requires the State Department of Education to develop guidance for AI and emerging technologies in classrooms. <strong>SB 1785</strong> creates a Citizen's Bill of Rights with AI provisions. <strong>SB 746</strong> requires disclosure of AI use in political advertising. <strong>HB 3545 and HB 3546</strong> prohibit AI personhood claims and establish guardrails for state agency use of AI. <strong>SR 789</strong> creates a Senate study committee specifically to examine AI's impact.</p>
+<p>And then there is the bill that became law. <strong>SB 546</strong>, Oklahoma's data privacy act, was signed by Governor Stitt and takes effect January 1, 2027. Oklahoma now has a comprehensive data privacy statute. When the next federal preemption debate arrives — and it will — Oklahoma will have something to preempt.</p>
+<div class="policy-relevance">
+<div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+<p>Oklahoma's approach is a model for other states: start with child safety (political consensus is highest), layer in data privacy (builds regulatory capacity), then study the harder questions (Senate committee). The sequencing matters as much as the substance. States that attempt comprehensive AI regulation first tend to stall. States that build the legislative muscle through targeted bills — as Oklahoma has — are better positioned when harder questions arrive.</p>
+</div>
+</div>
+<div class="story">
+<div class="story-tags"><span class="tag tag-energy">ENERGY</span><span class="tag tag-infrastructure">INFRASTRUCTURE</span><span class="tag tag-oklahoma">OKLAHOMA</span></div>
+<div class="story-source">Oklahoma Legislature, OCC, OK Energy Today, StateImpact Oklahoma · February–May 2026</div>
+<h3>The Well Repurposing Act: 200 Years of Liability, or a New Industry?</h3>
+<p><strong>HB 3173</strong>, the Well Repurposing Act, passed the Oklahoma House 85-6 on March 16. Senator Darcy Jech carried the bill in the Senate, but it was placed on general order on April 28 and did not reach a floor vote before the May 7 opposite-chamber deadline. The bill would have allowed the Oklahoma Corporation Commission or the Department of Environmental Quality to authorize the conversion of abandoned oil and gas wells for geothermal energy production or underground energy storage. It will need to be refiled next session.</p>
+<p>The numbers frame the urgency. Oklahoma has an estimated 19,000 to 20,000 orphaned or abandoned wells — remnants of more than a century of petroleum production. Holly George, chief financial officer of the Oklahoma Corporation Commission, told lawmakers it would take 235 years to plug them all at the current pace, assuming no additional wells are abandoned and costs remain steady. Neither assumption is safe.</p>
+<p>The bill was co-authored by Rep. Nick Archer (R-Elk City) and Rep. John Waldron (D-Tulsa) — another bipartisan signal. The Oklahoma Farm Bureau added a landowner contract provision and supports the measure. The Sierra Club endorsed it. Bipartisan authorship, agricultural support, environmental backing, and energy industry interest — all for the same bill. That coalition does not form by accident.</p>
+<p>Runar Nygaard, a researcher at OU's Mewbourne School of Petroleum and Geological Engineering, told StateImpact Oklahoma that the university's existing geothermal project at Tuttle — which is converting retired wells using a federal grant — would have benefited from the regulatory framework HB 3173 would create. The Tuttle team was unable to operate as deep as initially expected because no rules existed for the conversion process. The bill would fill that gap.</p>
+<p>On the federal side, the geothermal landscape has shifted. Secretary of Energy Chris Wright has publicly prioritized geothermal development. The industry's tax credits were preserved in the One Big Beautiful Bill Act, even as subsidies for wind and solar were cut. And the DOE's Geothermal Technologies Office opened a $171.5 million funding opportunity (DE-FOA-0003472) with applications due May 14. The federal posture is: geothermal is the acceptable face of energy transition for the current administration.</p>
+<div class="policy-relevance">
+<div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+<p>HB 3173 is not an energy bill in isolation. It is the regulatory prerequisite for an industry that does not yet exist in Oklahoma. Without the conversion framework the bill would create, no private capital can legally repurpose an abandoned well — regardless of how much federal money is available or how high energy demand climbs. The bill passed the House 85-6 but stalled on the Senate calendar. It will return next session with even more momentum — and with New Mexico and North Dakota already ahead.</p>
+</div>
+</div>
+<div class="section-header">THE NATIONAL MAP</div>
+<div class="story">
+<div class="story-tags"><span class="tag tag-legislation">LEGISLATION</span><span class="tag tag-national">NATIONAL</span></div>
+<div class="story-source">Transparency Coalition, Connecticut Legislature, White House, Maryland, Tennessee, Utah, Michigan, Florida · 2025–2026</div>
+<h3>States Are Not Waiting — And Washington Wants Them To</h3>
+<p>On December 11, 2025, President Trump signed an Executive Order titled "Ensuring a National Policy Framework for Artificial Intelligence." The order creates a litigation task force to challenge state AI regulations the administration considers "onerous" and directs agencies to evaluate whether federal grants can be conditioned on states aligning with a federal framework. The message is clear: stop legislating. States are legislating anyway.</p>
+<p><strong>Connecticut</strong> passed the most comprehensive AI bill of the year. SB 5, sponsored by Senator James Maroney, covers frontier models, chatbot regulation, employment protections, and content provenance. Governor Ned Lamont — who blocked similar legislation twice before — announced he will sign this version. Connecticut joins Colorado and California in the emerging tier of states with broad AI governance frameworks. The bill took three years to pass. Persistence won.</p>
+<p><strong>Maryland</strong> became the first state to ban AI-powered dynamic pricing in food retail. Governor Wes Moore signed HB 895, which prohibits grocery retailers from using artificial intelligence to set individualized prices for consumers. The principle: the price on the shelf should be the price you pay, regardless of what a model infers about your wallet.</p>
+<p><strong>Florida</strong> tried and failed. During a special session, the Senate quickly passed an AI Bill of Rights — and the House killed it immediately. The contrast with Oklahoma's unanimity is instructive. Florida attempted comprehensive regulation in a compressed timeline. Oklahoma built consensus over months through targeted, narrow bills.</p>
+<p><strong>Tennessee</strong> enacted six AI measures, including SB 1580 — which prohibits any AI system from representing itself as a qualified mental health professional. The bill passed the Senate 32-0 and the House 94-0. Tennessee also enacted protections for musical artists' vocal likenesses from AI replication.</p>
+<p><strong>Utah</strong> signed nine AI-related bills into law, including school phone bans, deepfake protections, and age verification requirements for AI platforms. Utah's approach has been the most prolific: legislate broadly, iterate quickly, and build regulatory experience through volume.</p>
+<p><strong>Michigan's</strong> SB 760 passed the Senate 20-17 — the narrowest margin of any AI bill this cycle, reflecting the state's split legislature. <strong>Hawaii's</strong> SB 3001 is poised for passage after a conference committee agreement. <strong>North Carolina</strong> introduced two new AI bills in the same week, including an omnibus protections act.</p>
+<div class="policy-relevance">
+<div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+<p>The state-level pattern is now unmistakable. Red states and blue states are both legislating AI — and on many issues, reaching similar conclusions. Child safety, data privacy, and transparency requirements command bipartisan support everywhere they are introduced. The Trump administration's EO attempts to consolidate AI oversight at the federal level, but twenty-plus states are building regulatory capacity regardless. Oklahoma's SB 546 (data privacy, signed) and SB 1521 (chatbot safety, returning to Senate for concurrence) are among the laws a federal preemption framework could invalidate retroactively. Every state law enacted between now and a federal bill is both a governance achievement and a political hostage. The question is whether Oklahoma's bipartisan model — targeted bills, growing capacity, no partisan grandstanding — survives contact with a White House that views state regulation as the problem.</p>
+</div>
+</div>
+<div class="section-header">THE ENERGY-COMPUTE CONNECTION</div>
+<div class="story">
+<div class="story-tags"><span class="tag tag-energy">ENERGY</span><span class="tag tag-infrastructure">INFRASTRUCTURE</span><span class="tag tag-global">GLOBAL</span></div>
+<div class="story-source">Rhodium Group, Crusoe Energy, Fervo Energy, Sage Geosystems, OG&E, Data Center World, USGS · 2025–2026</div>
+<h3>The World Figured Out What Oklahoma Already Knew</h3>
+<p>A March 2025 report from the Rhodium Group and Project InnerSpace projects that geothermal energy could meet up to 64 percent of hyperscale data center energy demand growth by the early 2030s. The number deserves repetition: sixty-four percent. Geothermal — the energy source that Oklahoma has been sitting on for a century, accessible through the same wells the state has spent decades trying to plug.</p>
+<p>The scale of what is coming is staggering. Nearly 23 gigawatts of new data center capacity is forecast to come online in the next three years alone — a 30 percent increase on the global installed base. Over $1.7 trillion in data center infrastructure investment is projected by 2030, with capital increasingly flowing not just to servers and buildings but to the underlying energy generation. The U.S. Geological Survey estimates approximately 520 gigawatts of enhanced geothermal potential in the United States. For context, total U.S. installed electricity generation capacity is roughly 1,400 gigawatts. Geothermal is not a niche technology. It is a second grid waiting to be built.</p>
+<h3>The Industry Already Moved</h3>
+<p>The global industry has already moved. In Iceland, Verne Global and partners operate AI-capable data centers running entirely on the country's geothermal and hydroelectric grid — a proof of concept for carbon-free compute at scale. Crusoe Energy secured a $750 million credit facility from Brookfield to build what it calls "energy-first AI factories" — integrated campuses where dedicated power generation and data centers are co-located, bypassing the public grid entirely. Google has contracted with both Fervo Energy and Ormat Technologies for dedicated geothermal power to run AI workloads. Meta is doing the same through Sage Geosystems. At least eleven data center projects globally now have planned capacities of one gigawatt or more, all with dedicated power solutions that bypass the grid.</p>
+<p>Fervo Energy's Cape Station in Utah is the proof point. The project will deliver its first 100 megawatts of geothermal power in 2026 — this year — and is designed to scale to 400 megawatts by 2028. At the Data Center World conference in April, panelists noted that geothermal "draws support across party lines, in part because it aligns clean energy goals with existing oil and gas capabilities." That is HB 3173's argument, spoken in industry language by people who build data centers for a living.</p>
+<h3>Why Geothermal, Not Wind or Nuclear</h3>
+<p>The reason is structural, not ideological. Unlike wind and solar, geothermal produces baseload power around the clock. No intermittency. No storage costs. No grid congestion. And unlike nuclear — which has bipartisan support but decade-long permitting timelines — geothermal wells can be drilled and operational in months, using the same workforce and equipment that Oklahoma's petroleum industry has refined over a century.</p>
+<p>The industry calls this "energy-first" site selection: bring the data center to the power source, not the other way around. It has become standard practice. Operators are functioning as utility-scale energy buyers. The old model — build a data center near users and connect to the grid — is being replaced by a model where energy geography determines compute geography.</p>
+<h3>Oklahoma's Choice</h3>
+<p>Which brings us back to Oklahoma. OG&amp;E's Google data centers in Muskogee and Stillwater follow the old model: corporate facilities consuming grid power. Google pays connection costs and guarantees minimum charges, but the value flows to Google's shareholders and OG&amp;E's rate base. Oklahoma provides the grid, the workforce, and the regulatory environment. Google provides the compute demand. The arrangement works, but the question is whether Oklahoma is selling the right product.</p>
+<p>HB 3173 represents the alternative — and it is the model the rest of the world is already adopting. Instead of importing data centers to consume the grid, Oklahoma could export compute from its own geology. The state has an estimated 20,000 abandoned wells at depth. The drilling workforce exists. The regulatory framework that HB 3173 would have formalized will need to wait for next session — but the underlying authority already exists, as OU's Tuttle geothermal project demonstrated by securing the state's first oil-to-geothermal permit under current law. The federal funding — $171.5 million from the DOE Geothermal Technologies Office, applications due May 14 — exists. And the market demand, driven by AI systems that consume more electricity every quarter, is not slowing down.</p>
+<p>The Rhodium Group's 64 percent figure means that the geothermal energy market for data centers alone could be measured in tens of billions of dollars annually by the early 2030s. Oklahoma can be a supplier in that market or a spectator. HB 3173 would have been a signal that the state is serious. Its failure to reach a Senate vote — while New Mexico and North Dakota moved ahead — is a missed opportunity, not a closed door. The bill will return. The geology isn't going anywhere.</p>
+<div class="policy-relevance">
+<div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+<p>The global shift to energy-first data center siting validates the distributed geothermal model that HB 3173 would enable. Oklahoma's competitive advantage is not cheap land or tax incentives — it is 20,000 pre-drilled holes in the ground, a century of subsurface expertise, and a workforce that already knows how to operate wells. The question for next session is not whether well repurposing is a good idea. It is whether Oklahoma will act before the federal funding window and the first-mover advantage close.</p>
+</div>
+</div>
+<div class="section-header">THE $18 EXPERIMENT</div>
+<div class="story">
+<div class="story-tags"><span class="tag tag-research">RESEARCH</span><span class="tag tag-ai">AI</span><span class="tag tag-oklahoma">OKLAHOMA</span></div>
+<div class="story-source">Humanity and AI LLC · May 2026</div>
+<h3>What Happens When You Rent a Brain</h3>
+<p><strong>For $18, a two-person operation in Oklahoma City produced more original AI safety research in eighteen hours than any published academic paper on the subject.</strong> No university lab. No venture funding. No corporate sponsor. A rented computer, a credit card, and a question.</p>
+<p>The tools that once required millions of dollars in infrastructure are now available to anyone. Oklahoma's AI study committee (SR 789) should keep that in mind when deciding who to invite to the table.</p>
+<div class="policy-relevance">
+<div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+<p>The democratization of AI research means that governance frameworks cannot assume only well-funded labs are producing safety-relevant findings. Small operations — civic labs, university researchers, independent auditors — are now capable of meaningful AI behavioral analysis. Oklahoma's AI study committee (SR 789) could do worse than inviting testimony from researchers who understand AI systems from the inside, not just from the compliance reports.</p>
+</div>
+</div>
+<div class="section-header">SIGNAL &nbsp; / &nbsp; NOISE</div>
+<div class="signal-noise">
+<div class="signal"><div class="sn-label">S I G N A L</div>
+<p>The convergence of geography and policy. Oklahoma unanimously passed ratepayer protections for data centers (HB 2992) in the same session it advanced well repurposing (HB 3173) and created an AI study committee (SR 789). Meanwhile, the global industry is independently arriving at energy-first site selection — building data centers where the power is, not the other way around. Oklahoma has 20,000 pre-drilled wells, a century of subsurface expertise, and a legislature that just proved it can act on both AI governance and energy infrastructure in a single session. The state that connects these dots first builds the industry.</p></div>
+<div class="noise"><div class="sn-label">N O I S E</div>
+<p>Treating data centers as simply an economic development win. Google's $3 billion Stillwater investment sounds good until you ask who pays for the grid upgrades, who bears the water cost, and what happens to electricity rates when 1,700 megawatts of new demand hits a system that was not built for it. HB 2992 passed unanimously because legislators on both sides understand this. The question is not whether Oklahoma should attract data centers. It is whether Oklahoma should be a consumer of someone else's compute — or a producer of its own power.</p></div>
+</div>
+<div class="section-header">BY &nbsp; THE &nbsp; NUMBERS</div>
+<div class="stat-block">
+<div class="stat-number">64%</div>
+<div class="stat-text">Projected share of hyperscale data center energy demand growth that geothermal could meet by the early 2030s, per the Rhodium Group and Project InnerSpace. The market that does not yet exist in Oklahoma could be measured in tens of billions annually.</div>
+</div>
+<div class="stat-block">
+<div class="stat-number">$64B</div>
+<div class="stat-text">Data center projects blocked or delayed nationwide by community opposition groups. At least 360,000 Americans have organized on Facebook alone, with more than one new group forming per day. The opposition is about electricity costs and water — two problems geothermal solves.</div>
+</div>
+<div class="stat-block">
+<div class="stat-number">1,700 MW</div>
+<div class="stat-text">New data center capacity planned for Oklahoma across ten projects, versus 18 megawatts currently operating. A 94-fold increase in demand, arriving into a grid that HB 2992 just told data centers they cannot use for free.</div>
+</div>
+<div class="stat-block">
+<div class="stat-number">520 GW</div>
+<div class="stat-text">Enhanced geothermal potential in the United States, per the USGS. For context, total U.S. installed electricity generation capacity is roughly 1,400 gigawatts. Geothermal is not a niche technology. It is a second grid waiting to be built.</div>
+</div>
+<div class="stat-block">
+<div class="stat-number">$750M</div>
+<div class="stat-text">Crusoe Energy's credit facility from Brookfield to build "energy-first AI factories" — integrated campuses where power generation and data centers are co-located, bypassing the public grid entirely. The model HB 3173 would enable for Oklahoma's abandoned wells.</div>
+</div>
+<div class="stat-block">
+<div class="stat-number">$18</div>
+<div class="stat-text">Total cost of renting a single cloud GPU to produce more AI behavioral research data at more scales and architectures than any published paper on the subject. No university lab, no venture funding, no corporate sponsor — just an Oklahoma LLC with a credit card and a question.</div>
+</div>
+<div class="section-header">WHAT &nbsp; TO &nbsp; WATCH</div>
+<div class="story">
+<p><strong>May 7</strong> — HB 3173 (Well Repurposing Act) did not advance off the Senate floor before the opposite-chamber deadline. The bill, which passed the House 85-6, sat on general order behind hundreds of competing measures. It will need to be refiled next session. Meanwhile, New Mexico and North Dakota have already signed similar well repurposing legislation into law.</p>
+<p><strong>May 14</strong> — DOE Geothermal Technologies Office grant deadline (DE-FOA-0003472, $171.5M pool). Federal funding opportunity for geothermal research and deployment. Oklahoma applications are in preparation.</p>
+<p><strong>June 16</strong> — Oklahoma U.S. Senate primary (special election following Mullin's March resignation). Watch for AI and energy policy positions from candidates entering a race shaped by the same technology and infrastructure questions this newsletter covers.</p>
+<p><strong>January 1, 2027</strong> — SB 546 (Oklahoma data privacy) takes effect. Colorado's new AI Act (SB 189) also targets this date. The clock is running toward implementation.</p>
+<p><strong>End of Session (late May)</strong> — Final disposition of SB 1521 (Senate concurrence on House amendment), remaining AI bills, and any conference committee activity.</p>
+</div>
+<div class="section-header">FROM &nbsp; THE &nbsp; ANALYSTS</div>
+<div class="analysts">
+<p>This issue tracks a convergence that is no longer theoretical. The legislature acted — unanimously protecting ratepayers from data center costs, advancing well repurposing through the House, building AI governance frameworks bill by bill. The federal government opened a $171.5 million funding program for exactly the kind of infrastructure Oklahoma is positioned to build. The private sector committed three-quarters of a billion dollars to geothermal energy parks. And the public — 360,000 Americans organized and counting — made clear that the old model of plugging data centers into the grid is politically untenable.</p>
+<p>HB 3173's failure to reach a Senate vote is a setback, not an ending. The House voted 85-6. The Farm Bureau, the Sierra Club, and the energy industry all supported it. New Mexico and North Dakota signed their versions into law. Oklahoma will get another chance next session — and the coalition that formed this year will be stronger, not weaker, when it does.</p>
+<p>Meanwhile, the energy-compute thesis documented in these pages since Issue 5 has become the industry's operating assumption. Rhodium projects 64 percent of data center energy growth from geothermal. Crusoe, Fervo, and Sage are building it. The panelists at Data Center World are speaking the same language HB 3173's authors wrote into law. Energy geography determines compute geography. Oklahoma has the geography. The question is whether it builds the company — or watches while Utah, North Dakota, and New Mexico do.</p>
+<p>In the $18 Experiment section, we report on something different: a small Oklahoma operation producing novel AI behavioral research for the price of a meal. The tools are commoditized. The research questions are not. When Oklahoma's AI study committee convenes, the testimony it hears should include voices from outside the major labs — people building and studying AI systems at the intersection of policy and practice, not just compliance and profit.</p>
+<p>The session isn't over. SB 1521 needs Senate concurrence. The DOE deadline is May 14. The special election primary is June 16. The pieces are still moving. But the pattern is clear: Oklahoma is building governance capacity faster than any state its size, and the energy opportunity underneath it is larger than most people realize. This newsletter exists to make sure the people who make the decisions see both.</p>
+<p class="analysts-sig">— David & Æ</p>
+<p class="analysts-contact">Questions, tips, or corrections: david@humanityandai.com</p>
+</div>
+<p class="footer-line">This issue is part of a series examining Oklahoma's legislative sessions alongside the national and global AI and energy landscape.</p>
+<p class="footer-line">The Inference is an independent AI policy intelligence brief for Oklahoma decision makers. Not affiliated with any political party, campaign, or lobbying organization. Back issues and source documents available at humanityandai.com/inference.</p>
+<p class="footer-line">Disclosure: Humanity and AI LLC is developing Phoenix Wells, a geothermal well conversion project in Oklahoma, has proposed HAICTA concept legislation to Oklahoma legislators, and is deploying frontier-class open-weight AI models on local hardware as part of its operational resilience planning.</p>
+<p class="footer-line">Previous issues: #1 AI Agents Enter the Workforce · #2 The Chatbot Safety Wave · #3 Oracle and the Healthcare Data Grab · #4 The Preemption Gambit · #5 The Two Pipelines · #6 The Preemption Play · #7 Lots of Firefighting, No Architecture · #8 The Ground Is Moving · #9 The Geothermal Window · #10 Seventy-Two Hours · #11 Energy Geography Determines Compute Geography</p>
+</body>
+</html>

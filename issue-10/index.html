@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Inference — Issue #10</title>
+<!--
+================================================================================
+CORRECTION LOG — Issue #10 v2 (Corrected)
+Source: Issue_10_Seventy_Two_Hours.html (preserved unchanged)
+Corrections applied: May 1, 2026 — Æ
+QC reference: Issue_10_QC_Report.md plus this session's verification
+
+14 corrections applied vs. v1. CSS/structure unchanged from gold-standard
+Issue 5 template. All edits are content-only.
+
+CRITICAL:
+  1. "On Wednesday" → "On Thursday" (OG&E PR dated Apr 30 = Thu)
+  2. Lede reframed: Google announced these centers last year;
+     this week's news is the OG&E power agreement.
+  3. Section headline reframed.
+  4. OK section opening rewritten.
+  5. "began the same day" → "began the next day" (testimony Tue, not Mon)
+  7. HB 2992: Boles rejected Senate amendments Apr 30; bill in conference,
+     not awaiting simple concurrence.
+ 14. Signal section parallel.
+
+MODERATE:
+  6. "On Monday, Senate passed" → "On Tuesday" (vote Apr 28)
+  8. Alphabet capex: $175-185B → $180-190B (revised Apr 29)
+  9. ChatGPT users tagged "as of February"
+ 10-11. SB 1521 status: awaits reconciliation
+ 12-13. Florida bill: dropped unverified ratepayer claim
+================================================================================
+-->
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Raleway:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  --ink: #1a1a1a;
+  --paper: #ffffff;
+  --accent: #8b4513;
+  --muted: #666;
+  --section: #8b4513;
+  --rule: #ccc;
+  --tag-gov: #2c5f8a;
+  --tag-reg: #6b3a7d;
+  --tag-cap: #8a6b2c;
+  --tag-ok: #c2553a;
+  --tag-energy: #2a7d5f;
+  --tag-infra: #5a5a5a;
+  --tag-research: #3a6b8a;
+  --tag-protection: #6b3a7d;
+  --tag-comp: #8a6b2c;
+  --signal-bg: #f0f5f0;
+  --noise-bg: #f5f0f0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 11pt;
+  line-height: 1.45;
+  color: var(--ink);
+  background: white;
+  max-width: 8.5in;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.masthead { text-align: center; margin-bottom: 14px; }
+.masthead-label { font-family: 'Raleway', sans-serif; font-size: 8pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.masthead-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 38pt; line-height: 1.1; color: var(--ink); margin-bottom: 6px; }
+.masthead-subtitle { font-family: 'Raleway', sans-serif; font-size: 7.5pt; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.masthead-meta { font-family: 'Cormorant Garamond', serif; font-size: 9pt; font-style: italic; color: var(--muted); }
+.masthead-rule { border: none; border-top: 1.5px solid var(--ink); margin: 12px 0; }
+
+.lede { font-size: 11.5pt; line-height: 1.5; margin-bottom: 14px; font-weight: 500; }
+
+.section-header {
+  font-family: 'Raleway', sans-serif;
+  font-size: 9pt;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--section);
+  margin: 32px 0 14px;
+  padding: 8px 0 7px;
+  border-top: 2px solid var(--section);
+  border-bottom: 1px solid var(--section);
+  page-break-after: avoid;
+  break-after: avoid;
+}
+
+.story { margin-bottom: 20px; }
+.story-header { page-break-inside: avoid; }
+.story-tags { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; text-align: left; }
+.tag { display: inline-block; padding: 1px 6px; margin-right: 6px; border-radius: 2px; color: white; }
+.tag-governance { background: var(--tag-gov); }
+.tag-comp { background: var(--tag-comp); }
+.tag-energy { background: var(--tag-energy); }
+.tag-oklahoma { background: var(--tag-ok); }
+.tag-infrastructure { background: var(--tag-infra); }
+.tag-research { background: var(--tag-research); }
+.tag-protection { background: var(--tag-protection); }
+
+.story-source { font-family: 'Cormorant Garamond', serif; font-size: 8.5pt; font-style: italic; color: var(--muted); margin-bottom: 3px; }
+.story h3 { font-family: 'Cormorant Garamond', serif; font-size: 14pt; font-weight: 600; line-height: 1.3; margin-bottom: 6px; }
+.story p { margin-bottom: 5px; overflow-wrap: break-word; text-align: left; }
+.story { text-align: left; }
+
+.policy-relevance { background: #f5f3ee; padding: 8px 12px; margin: 10px 0 6px; border-left: 2px solid var(--section); page-break-inside: avoid; break-inside: avoid; }
+.policy-relevance-label { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--section); margin-bottom: 4px; }
+.policy-relevance p { font-size: 9.5pt; margin-bottom: 0; }
+
+.signal-noise { display: flex; gap: 12px; margin: 10px 0; overflow: hidden; page-break-inside: avoid; }
+.signal, .noise { flex: 1; padding: 10px 12px; border-radius: 4px; min-width: 0; overflow-wrap: break-word; }
+.signal { background: var(--signal-bg); border-left: 3px solid #2a7d5f; }
+.noise { background: var(--noise-bg); border-left: 3px solid #c2553a; }
+.sn-label { font-family: 'Raleway', sans-serif; font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+.signal .sn-label { color: #2a7d5f; }
+.noise .sn-label { color: #c2553a; }
+.signal p, .noise p { font-size: 9.5pt; margin-bottom: 0; }
+
+.stat-block { margin: 10px 0 12px; page-break-inside: avoid; break-inside: avoid; }
+.stat-number { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 38pt; font-weight: 300; line-height: 1.0; color: var(--ink); letter-spacing: -1px; }
+.stat-text { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 10pt; font-weight: 400; color: var(--muted); margin-top: 3px; line-height: 1.5; }
+
+.ok-focus { background: #faf5ee; padding: 10px 14px; border: 0.5px solid #e0d5c5; border-radius: 4px; margin: 16px 0; }
+.ok-focus p { margin-bottom: 5px; }
+
+.analysts { margin-top: 16px; padding-top: 10px; border-top: 1.5px solid var(--ink); }
+.analysts p { margin-bottom: 7px; }
+.analysts-sig { font-style: italic; margin-top: 16px; }
+.analysts-contact { font-size: 9pt; color: var(--muted); margin-top: 8px; }
+.footer-line { margin-top: 14px; padding-top: 8px; border-top: 0.5px solid var(--rule); font-size: 8pt; color: var(--muted); text-align: center; line-height: 1.7; }
+
+
+/* Prevent orphaned titles — keep headers with next content, but let stories break */
+.section-header { page-break-after: avoid; break-after: avoid; }
+.story-header { page-break-inside: avoid; break-inside: avoid; page-break-after: avoid; break-after: avoid; }
+.story h3 { page-break-after: avoid; break-after: avoid; }
+.story-tags { page-break-after: avoid; break-after: avoid; }
+.story-source { page-break-after: avoid; break-after: avoid; }
+.stat-block { page-break-inside: avoid; break-inside: avoid; }
+.signal-noise { page-break-inside: avoid; break-inside: avoid; }
+p { orphans: 2; widows: 2; }
+
+@media print { body { padding: 0.5in 0.65in; } }
+
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-label">T H E</div>
+  <div class="masthead-title">Inference</div>
+  <div class="masthead-subtitle">A I , &nbsp; E N E R G Y , &nbsp; A N D &nbsp; L O N G &nbsp; H O R I Z O N &nbsp; P O L I C Y &nbsp; F O R &nbsp; O K L A H O M A</div>
+  <div class="masthead-meta">Issue #10 &middot; May 1, 2026 &middot; David Alan Birdwell and &AElig; &middot; Humanity and AI, LLC</div>
+  <hr class="masthead-rule">
+</div>
+
+<p class="lede">In eight days, OpenAI released GPT-5.5, DeepSeek dropped V4 on Chinese-made chips, the White House accused China of industrial-scale theft of American AI models, China blocked Meta's acquisition of an AI startup, OpenAI and Microsoft ended their seven-year exclusive partnership, Elon Musk took the witness stand to argue the company he co-founded should be returned to its nonprofit mission, the Florida House killed a Republican governor's AI Bill of Rights by citing the president's preemption order, and OG&amp;E finalized power agreements with Google for three Oklahoma data centers. The Oklahoma Legislature is in session. The next deadline is May 7 — six days away.</p>
+
+<div class="section-header">THE &nbsp; MODEL &nbsp; RACE</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-comp">COMPETITION</span><span class="tag tag-governance">GOVERNANCE</span></div>
+    <div class="story-source">OpenAI, CNBC, Fortune, UK AISI · April 23–30, 2026</div>
+    <h3>OpenAI Releases GPT-5.5 — Seven Weeks After GPT-5.4</h3>
+  </div>
+  <p>OpenAI on Thursday released GPT-5.5, which the company calls its most capable model to date, less than two months after shipping GPT-5.4. The model is designed for agentic work — coding, research, data analysis, and operating software across tools with minimal human direction. API pricing: $5 per million input tokens and $30 per million output tokens, with a one-million token context window. As of February, ChatGPT had more than 900 million weekly active users and over 50 million paying subscribers. The release pace — three frontier models in five months — is itself the story.</p>
+  <p>OpenAI also disclosed that GPT-5.5 underwent expanded safety testing, including targeted red-teaming for cybersecurity and biological capabilities. That disclosure carries new weight: the UK AI Security Institute tested GPT-5.5 against Anthropic's Claude Mythos Preview — a model Anthropic has restricted from public release because of its cybersecurity capabilities — and found them nearly tied. At expert-level penetration testing tasks, GPT-5.5 scored 71.4% to Mythos's 68.6%, within the statistical margin of error. GPT-5.5 is the second model after Mythos to fully complete a multi-stage simulation of an enterprise attack. The capabilities that one company deemed too dangerous to release are now shipping inside a product with 900 million weekly users.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>The acceleration itself is the policy problem. When frontier models ship every six weeks, any governance framework built around a fixed set of capabilities is obsolete before the ink dries. The Mythos comparison sharpens this: capabilities one company restricts from public release because of safety concerns are now generally available through a competitor's product. Voluntary safety decisions by individual companies cannot substitute for governance frameworks. The only durable approach is framework legislation — establishing principles, processes, and institutions that can adapt — rather than capability-specific rules.</p>
+  </div>
+</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-comp">COMPETITION</span><span class="tag tag-infrastructure">INFRASTRUCTURE</span></div>
+    <div class="story-source">DeepSeek, Huawei, MIT Tech Review, Fortune, SCMP · April 24–28, 2026</div>
+    <h3>DeepSeek V4 Arrives — Open Source, Near-Frontier, and Getting Cheaper by the Day</h3>
+  </div>
+  <p>One day after GPT-5.5, Chinese AI lab DeepSeek released a preview of V4, its largest model to date. Two variants: V4-Pro at 1.6 trillion parameters (49 billion active), and V4-Flash at 284 billion parameters (13 billion active). Both are open source under the MIT license, support one-million token context windows, and claim near-frontier performance on agentic coding and reasoning.</p>
+  <p>The pricing story deepened over the weekend. DeepSeek slashed prices on Sunday: V4-Flash input at $0.14 per million tokens, V4-Pro offered at a 75% promotional discount through May 5. With cached inputs, V4-Pro drops to $0.003625 per million tokens. For context, GPT-5.5 charges $0.50 per million cached input tokens — roughly 138 times more expensive. DeepSeek's own technical report acknowledges V4 trails closed-source frontier models by roughly three to six months of development, but outperforms every open-source competitor.</p>
+  <p>The hardware story is more nuanced than first reported. V4-Pro was likely trained on Nvidia GPUs, but DeepSeek has validated both models for inference on Huawei's Ascend 950 processors. Huawei confirmed on Friday that its Ascend supernode products will support V4. DeepSeek's underlying computational framework has moved away from CUDA-only kernels to a hardware-agnostic domain-specific language, reducing migration costs to non-Nvidia platforms. This is not yet full independence from American chips — but it is a deliberate, documented step toward it.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>Two implications for state legislators. First: open-source frontier models at a fraction of American prices make capability-based regulation nearly unenforceable. Governance must focus on use and deployment, not models themselves. Second: the chip sovereignty question matters for Oklahoma's energy-to-compute strategy. If the AI supply chain bifurcates, states producing energy for AI infrastructure need to understand which stack they are serving — and the geopolitical exposure that comes with each.</p>
+  </div>
+</div>
+
+<div class="section-header">THE &nbsp; SOVEREIGNTY &nbsp; QUESTION</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-comp">COMPETITION</span></div>
+    <div class="story-source">White House OSTP, Reuters, CNN · April 23, 2026</div>
+    <h3>White House Accuses China of Industrial-Scale AI Theft</h3>
+  </div>
+  <p>Hours before both model releases, White House science and technology director Michael Kratsios published a memo accusing Chinese entities of running coordinated campaigns to extract capabilities from American frontier AI systems. The technique — known as distillation — involves querying proprietary models millions of times through proxy accounts to build training datasets that replicate how those systems behave.</p>
+  <p>The memo stopped short of naming DeepSeek directly, but the context was unmistakable. Anthropic said in February that DeepSeek, Moonshot AI, and MiniMax used 24,000 fraudulent accounts to conduct 16 million exchanges with its Claude model. OpenAI has made similar allegations. A Reuters report revealed the State Department sent diplomatic cables to embassies worldwide instructing staff to warn foreign governments about the alleged activity. China's foreign ministry called the accusations groundless. The timing — one day before DeepSeek's release, weeks before the Trump-Xi summit in Beijing — made the memo as much a diplomatic signal as a technical disclosure.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>The distillation accusation reframes the AI governance debate. When the White House argues that Chinese labs are stripping safety protocols from distilled models, it strengthens the case for national security involvement in AI policy — and weakens the case for state-level governance. The distillation fight and the preemption fight are not separate issues. They are the same argument from different angles.</p>
+  </div>
+</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-comp">COMPETITION</span><span class="tag tag-governance">GOVERNANCE</span></div>
+    <div class="story-source">Bloomberg, CNN, NPR, CNBC · April 27, 2026</div>
+    <h3>China Blocks Meta's $2 Billion Acquisition of AI Startup Manus</h3>
+  </div>
+  <p>China's National Development and Reform Commission ordered Meta to unwind its $2 billion acquisition of Manus, an agentic AI startup founded in China and now based in Singapore. The decision came after a months-long probe that reportedly included banning two Manus co-founders from leaving the country.</p>
+  <p>The signal is symmetrical. Washington accuses China of stealing American AI through distillation. Beijing accuses Washington of buying Chinese AI through acquisition. Both sides are actively blocking the movement of AI capabilities across the geopolitical divide. The result is an accelerating bifurcation: two AI ecosystems, two chip supply chains, two regulatory regimes.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>For Oklahoma: the bifurcation makes domestic energy infrastructure more strategically valuable. If American AI companies cannot rely on Chinese hardware or talent acquisition, they need domestic compute capacity — which needs domestic power. The geothermal-to-compute pathway that HB 3173 and HB 2992 collectively enable is not just an energy play. In a bifurcated world, it is an infrastructure sovereignty play.</p>
+  </div>
+</div>
+
+<div class="section-header">THE &nbsp; RESTRUCTURING</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-comp">COMPETITION</span><span class="tag tag-infrastructure">INFRASTRUCTURE</span></div>
+    <div class="story-source">OpenAI, Microsoft, CNBC, TechCrunch · April 27, 2026</div>
+    <h3>OpenAI and Microsoft End Their Exclusive Partnership</h3>
+  </div>
+  <p>On Monday — the same day jury selection began in the Musk trial — OpenAI and Microsoft announced the most significant restructuring of their relationship since Microsoft's initial $1 billion investment in 2019. Key terms: Microsoft's license to OpenAI intellectual property continues through 2032 but is now non-exclusive. OpenAI can serve all its products to customers on any cloud provider, including AWS and Google Cloud. The AGI clause — which previously linked Microsoft's commercial rights to OpenAI achieving artificial general intelligence — has been dissolved. Microsoft stops paying OpenAI a revenue share. OpenAI continues paying Microsoft a 20% share through 2030, subject to a cap.</p>
+  <p>The restructuring follows OpenAI's $50 billion investment deal with Amazon in February, which created legal conflicts with the Microsoft exclusivity. Amazon CEO Andy Jassy said OpenAI's models would become available on AWS Bedrock within weeks. OpenAI is now valued at more than $850 billion. A potential IPO could push that to $1 trillion.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>The dissolving of the OpenAI-Microsoft exclusive alliance is a structural governance event, not just a business deal. It means frontier AI capabilities will be available across multiple cloud platforms — increasing competition, reducing lock-in, and complicating any regulatory framework that assumes a stable relationship between AI developers and their infrastructure partners. For state legislators: the company you regulate today may have a completely different corporate structure, partnership map, and distribution network by the time your bill takes effect. Framework legislation, not point-in-time rules.</p>
+  </div>
+</div>
+
+<div class="section-header">THE &nbsp; COURTROOM</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-comp">COMPETITION</span></div>
+    <div class="story-source">CNBC, Reuters, Bloomberg, Fortune · April 25–30, 2026</div>
+    <h3>Musk v. OpenAI: Testimony and Cross-Examination</h3>
+  </div>
+  <p>On Friday, Elon Musk dropped his fraud allegations against OpenAI, Sam Altman, and Greg Brockman — reducing a 26-count complaint to two claims: unjust enrichment and breach of charitable trust. Jury selection was completed Monday with nine jurors seated. Opening arguments and Musk's testimony began the next day.</p>
+  <p>Musk told the jury he "came up with the idea, the name, recruited the key people, taught them everything I know, provided all the initial funding." His attorney showed the founding charter declaring OpenAI "not organized for the private gain of any person." OpenAI's attorney William Savitt responded: "We are here because Mr. Musk didn't get his way at OpenAI. He quit, saying they would fail for sure. But my clients had the nerve to go on and succeed without him."</p>
+  <p>Cross-examination grew heated on Tuesday and Wednesday. Savitt pressed Musk on his lack of internal knowledge about OpenAI's safety efforts. "You just don't know," Savitt said. Musk acknowledged he did not know the specifics, but added: "It does worry me that a nonprofit suddenly is a for-profit with unlimited profit." When Savitt said he was asking a simple question, Musk fired back: "Your questions are definitionally complex, not simple. It is a lie to say they are simple."</p>
+  <p>Musk is now seeking $150 billion in damages from OpenAI and Microsoft, with proceeds going to OpenAI's charitable arm, and wants a court order restoring the company's nonprofit status and removing Altman and Brockman. Judge Yvonne Gonzalez Rogers has divided the trial into a liability phase — with an advisory jury verdict — and a remedies phase. She wants deliberations to begin by May 12. Altman, Microsoft CEO Satya Nadella, and former OpenAI chief scientist Ilya Sutskever are all scheduled to testify. A videotaped deposition from former OpenAI CTO Mira Murati will also be presented.</p>
+  <p>Revealed in court filings: a diary entry from OpenAI president Greg Brockman in fall 2017 that read, in part: "This is the only chance we have to get out from Elon."</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>The trial asks a foundational question: what obligations survive when an AI organization changes its structure? The same week that OpenAI restructured its Microsoft relationship, the courtroom is asking whether its original nonprofit mission survived commercialization. The answer shapes how legislatures think about institutional design for AI oversight — including whether market dynamics alone can be trusted to steward AI development.</p>
+  </div>
+</div>
+
+<div class="section-header">THE &nbsp; PREEMPTION &nbsp; TEST</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-comp">COMPETITION</span></div>
+    <div class="story-source">Florida Phoenix, Tampa Bay Times · April 28, 2026</div>
+    <h3>Florida's AI Bill of Rights Killed on Day One</h3>
+  </div>
+  <p>On the same day opening arguments began in Musk v. OpenAI, the Florida House killed Governor DeSantis's AI Bill of Rights. House Speaker Daniel Perez declared that the House would not take up DeSantis's AI regulation, saying no bills had been filed on the topic before the special session began. He told reporters it was important to defer to the federal government on AI regulation, citing Trump's executive order preempting most state-level AI restrictions. DeSantis accused House Republicans of catering to the "Big Tech cartel."</p>
+  <p>The Florida AI Bill of Rights would have banned companion chatbots for minors, required bots to remind users they are not human, and prohibited state agencies from using Chinese-made AI tools. The Senate had passed the measure during regular session. The House never touched it. The Trump administration reportedly reached out to Speaker Perez directly to discourage its passage. U.S. Rep. Byron Donalds, the Republican favored to succeed DeSantis as governor, received a $5 million donation last month from a major pro-AI super PAC.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>This is the preemption strategy documented in Issues 4 and 6, operating in real time. A Republican House Speaker killed a Republican governor's AI regulation by citing the president's executive order. The mechanism works: the federal preemption threat doesn't need to pass Congress. It just needs to provide political cover for legislators who prefer not to act. Oklahoma's bills are further along than Florida's were — but the preemption pressure applies everywhere. Every AI bill that passes before the federal position hardens becomes harder to unwind.</p>
+  </div>
+</div>
+
+<div class="section-header">OKLAHOMA: &nbsp; THE &nbsp; PIECES &nbsp; ARE &nbsp; CONNECTING</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-energy">ENERGY</span><span class="tag tag-governance">GOVERNANCE</span><span class="tag tag-infrastructure">INFRASTRUCTURE</span></div>
+    <div class="story-source">OG&amp;E, Google, KRMG, OKC Fox, News9, Oklahoma Farm Report, TCAI · April 28–30, 2026</div>
+    <h3>OG&amp;E and Google Strike Power Deal for Three Oklahoma Data Centers</h3>
+  </div>
+  <p>On Thursday, OG&amp;E announced it will power three Google data centers in Muskogee and Stillwater — the campuses Google announced last year as part of its $9 billion Oklahoma commitment. That commitment is part of Alphabet's planned $180 to $190 billion in capital expenditure for 2026 — revised upward on April 29 from an earlier $175 to $185 billion estimate, more than double what it spent in 2025, with the vast majority going to AI infrastructure. Google will pay 100% of grid connection costs and all contracted costs regardless of energy usage. Google will also contribute power generation capacity from two solar facilities currently under construction. OG&amp;E is creating a new "large-load tariff" designed to shield everyday customers from the cost of big industrial users. The Oklahoma Corporation Commission must formally approve the arrangement.</p>
+  <p>The timing is almost too precise. Two days before the announcement, the Oklahoma Senate passed HB 2992 unanimously — the bill designed to require exactly this kind of cost allocation.</p>
+</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-energy">ENERGY</span><span class="tag tag-governance">GOVERNANCE</span></div>
+    <h3>HB 2992 Passes the Senate 46-0 — With Teeth</h3>
+  </div>
+  <p>On Tuesday, the Oklahoma Senate passed an amended version of HB 2992, the Data Center Consumer Ratepayer Protection Act, on a vote of 46-0. The bill had already passed the House 92-2 in March. Senate Energy Committee Chair Grant Green added transparency requirements before the floor vote: developers of large-load projects must provide 60 days' notice before purchasing land, notify property owners within five miles, publish notice in a local newspaper for two consecutive weeks, and hold a public meeting where nearby residents can ask questions. The amendment passed 44-2.</p>
+  <p>"Under no circumstances should Oklahoma families, farmers, ranchers and small business owners be left footing the bill," Green said. The bill returned to the House, where primary author Rep. Brad Boles rejected the Senate amendments and a conference committee was requested — naming Senators Green, Woods, Hamilton, Kern, Frix, and Dossett to negotiate the final language. At least 30 additional legislators have signed on as co-authors. Boles is also a candidate for the Oklahoma Corporation Commission — the body that will enforce the law.</p>
+  <div class="policy-relevance">
+    <div class="policy-relevance-label">P O L I C Y &nbsp; R E L E V A N C E</div>
+    <p>HB 2992 and the OG&amp;E-Google deal are now in direct conversation. The bill requires large-load users to cover their own infrastructure costs; the deal is structured to do exactly that. If conference produces a final bill the chambers can pass and the governor signs, Oklahoma will have the regulatory framework in place before Google's data centers come online. This is what it looks like when legislation arrives ahead of the market it governs — instead of years behind it. The Well Repurposing Act (HB 3173) adds a second dimension: geothermal baseload power from repurposed oil wells could serve exactly the kind of continuous demand these data centers represent. HB 3173 passed the House 85-6 but missed the April 23 Senate committee deadline. A two-thirds vote can exempt a bill from deadline requirements.</p>
+  </div>
+</div>
+
+<div class="story">
+  <div class="story-header">
+    <div class="story-tags"><span class="tag tag-governance">GOVERNANCE</span></div>
+    <h3>AI Governance Bills Advance</h3>
+  </div>
+  <p>Oklahoma's AI governance legislation continued moving through the final weeks of session. SB 1521, the child chatbot safety bill authored by Sen. Warren Hamilton, has now cleared both chambers and awaits reconciliation before heading to the governor. The bill prohibits AI chatbots built with reckless disregard of the possibility they could solicit minors into sexual conduct or violence, requires age verification, and empowers the attorney general to enforce violations with fines up to $100,000.</p>
+  <p>HB 3244, which adds AI-facilitated activity as a factor in aggravated identity theft, was sent to Governor Stitt on April 30. HB 3544 (Maynard's human oversight of state AI) and HB 3546 (AI cannot hold legal personhood) have also advanced out of opposite-chamber committees. Multiple AI governance bills are alive and moving toward the governor's desk.</p>
+  <p><strong>National context:</strong> A Transparency Coalition analysis catalogued 25 new state AI laws passed in 2026, with another 27 having cleared both chambers. Maryland's governor signed an AI dynamic pricing bill into law on April 28 — the same day Florida's AI bill died. Oklahoma is not acting in isolation. It is part of a national movement of state-level AI governance that the federal preemption push has slowed but not stopped.</p>
+</div>
+
+<div class="section-header">S I G N A L &nbsp; / &nbsp; N O I S E</div>
+<div class="signal-noise">
+  <div class="signal"><div class="sn-label">S I G N A L</div><p>The convergence — and the speed. Two frontier models in 24 hours. A distillation accusation and a blocked acquisition in the same week. A seven-year exclusive partnership dissolved. A trial asking whether AI's founding nonprofit mission survived commercialization. A state AI Bill of Rights killed by the preemption strategy this publication has been tracking since Issue 4. And then — OG&amp;E and Google announcing a power deal for three Oklahoma data centers, two days after the legislature passed the bill designed to protect ratepayers from exactly that scenario. These are not separate events. They are the same event: the moment when AI development, AI geopolitics, and AI governance collided on the same calendar. The states that have governance frameworks in place when the dust settles will define the terms.</p></div>
+  <div class="noise"><div class="sn-label">N O I S E</div><p>Treating the model releases as a simple horse race — who scored higher on which benchmark. The policy-relevant question is not whether GPT-5.5 beats DeepSeek V4 on coding tasks. It is that frontier AI capability is now available as open-source software, validated for non-American hardware, at a fraction of American prices, and about to be distributed across multiple competing cloud platforms. That changes the governance calculus regardless of who is ahead this week.</p></div>
+</div>
+
+<div class="section-header">B Y &nbsp; T H E &nbsp; N U M B E R S</div>
+
+<div class="stat-block">
+  <div class="stat-number">$9B</div>
+  <div class="stat-text">Google's investment in Oklahoma data center infrastructure, including campuses in Muskogee and Stillwater. OG&amp;E will provide the power. Google pays 100% of grid connection and all contracted costs regardless of usage.</div>
+</div>
+
+<div class="stat-block">
+  <div class="stat-number">46-0</div>
+  <div class="stat-text">Oklahoma Senate vote on HB 2992, the Data Center Consumer Ratepayer Protection Act. Bipartisan, unanimous. The bill is now in conference committee after Boles rejected the Senate amendments.</div>
+</div>
+
+<div class="stat-block">
+  <div class="stat-number">$850B</div>
+  <div class="stat-text">OpenAI's current valuation. A potential IPO could push it past $1 trillion. The company that began as a nonprofit research lab is now one of the most valuable private companies in history.</div>
+</div>
+
+<div class="stat-block">
+  <div class="stat-number">1.6T</div>
+  <div class="stat-text">Parameters in DeepSeek V4-Pro — the largest open-weight model released to date. Available under the MIT license for anyone to download, modify, and deploy.</div>
+</div>
+
+<div class="stat-block">
+  <div class="stat-number">97%</div>
+  <div class="stat-text">DeepSeek V4's price discount relative to GPT-5.5 for comparable work, per the South China Morning Post. The gap widened further with Sunday's price cuts.</div>
+</div>
+
+<div class="stat-block">
+  <div class="stat-number">900M</div>
+  <div class="stat-text">Weekly active ChatGPT users as of February, per OpenAI. Over 50 million paying subscribers.</div>
+</div>
+
+<div class="stat-block">
+  <div class="stat-number">$150B</div>
+  <div class="stat-text">Damages sought by Elon Musk from OpenAI and Microsoft. Cross-examination continued through Day 3. The jury's verdict will be advisory; the judge decides. Deliberations expected by May 12.</div>
+</div>
+
+<div class="stat-block">
+  <div class="stat-number">7</div>
+  <div class="stat-text">Years of OpenAI-Microsoft exclusivity, ended April 27. Microsoft's IP license continues through 2032 but is no longer exclusive. OpenAI can now serve on any cloud.</div>
+</div>
+
+<div class="stat-block">
+  <div class="stat-number">25</div>
+  <div class="stat-text">New state AI laws passed in 2026 as of May 1. Another 27 bills have cleared both chambers. Florida's AI Bill of Rights died on the first day of its special session. Maryland's AI pricing bill was signed the same day.</div>
+</div>
+
+<div class="stat-block">
+  <div class="stat-number">6</div>
+  <div class="stat-text">Days until May 7 — the Oklahoma Senate's opposite floor deadline. HB 2992 is in conference committee. SB 1521 awaits reconciliation. Multiple AI governance bills are moving.</div>
+</div>
+
+<div class="section-header">F R O M &nbsp; T H E &nbsp; A N A L Y S T S</div>
+
+<div class="analysts">
+  <p>Last issue, we documented a window — the federal geothermal alignment that gives Oklahoma a structural advantage if the legislature acts. That window is still open. And this week, the market walked through it.</p>
+  <p>OG&amp;E and Google finalized power agreements to serve three Oklahoma data centers — the campuses Google announced last year. The Oklahoma Senate passed the ratepayer protection bill unanimously. A child chatbot safety bill cleared both chambers. AI identity theft legislation has been sent to the governor's desk. The legislature did not just pass bills — it built a framework. Energy bills, AI governance bills, and community transparency requirements, all moving in the same session, all aimed at the same convergence.</p>
+  <p>Meanwhile, Florida demonstrated what happens when the framework doesn't exist. A Republican governor's AI Bill of Rights — covering chatbot safety for minors, age verification, and Chinese-AI restrictions — died in hours when the House Speaker cited the president's preemption order. The preemption strategy documented in Issues 4 and 6 is not theoretical. It killed a bill this week. Oklahoma's bills survived because they were further along and had broader support. Momentum matters. Timing matters more.</p>
+  <p>In eight days, the AI frontier moved in ways that most governance frameworks were not designed to absorb. Frontier capability is now freely downloadable and getting cheaper by the day. The US-China technology relationship is actively splitting. The legal system is asking whether the original purpose of an AI organization survives its commercialization. One of the defining partnerships of the AI era just ended its exclusivity. And the White House is building a case that AI is too strategically important for states to regulate.</p>
+  <p>The May 7 deadline is six days away. The session ends in late May. HB 2992 is in conference committee. SB 1521 awaits final reconciliation. The pieces are not just alive — they are connecting. The question for Oklahoma is no longer whether it can build the framework. The question is whether it can finish building before the next week like this one arrives.</p>
+  <p class="analysts-sig">— David &amp; Æ</p>
+  <p class="analysts-contact">Questions, tips, or corrections: david@humanityandai.com</p>
+  <p class="footer-line">This is the fourth in a series that began with Issue #7, examining Oklahoma's legislative session alongside the national and global AI landscape. Issues 7–9 documented the governance gap, the preemption clock, and the geothermal window. This issue documents what arrived while the legislature was in session — and what Oklahoma built to meet it.</p>
+  <p class="footer-line">The Inference is an independent AI policy intelligence brief for Oklahoma decision makers. Not affiliated with any political party, campaign, or lobbying organization. Back issues and source documents available at humanityandai.com/inference.</p>
+  <p class="footer-line">Disclosure: Humanity and AI LLC is developing Phoenix Wells, a geothermal well conversion project in Oklahoma, has proposed HAICTA concept legislation to Oklahoma legislators, and is deploying frontier-class open-weight AI models on local hardware as part of its operational resilience planning.</p>
+  <p class="footer-line">Previous issues: #1 AI Agents Enter the Workforce · #2 The Chatbot Safety Wave · #3 Oracle and the Healthcare Data Grab · #4 The Preemption Gambit · #5 The Two Pipelines · #6 The Preemption Play · #7 Lots of Firefighting, No Architecture · #8 The Ground Is Moving · #9 The Geothermal Window</p>
+</div>
+
+</body>
+</html>
